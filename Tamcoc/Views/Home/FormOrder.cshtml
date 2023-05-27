@@ -1,0 +1,117 @@
+﻿@model Tamcoc.ViewModel.FormOrderViewModel
+<div class="box-room-detail " style="width:60%">
+    <div class="container">
+        <form class="order-form">
+            @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+
+                        <label for="Order_FullName">@Resources.FullName</label>
+                        @Html.TextBoxFor(model => model.Order.CustomerInfo.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
+                        @Html.ValidationMessageFor(model => model.Order.CustomerInfo.FullName)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Order_FullName">@Resources.Email</label>
+                        @Html.TextBoxFor(model => model.Order.CustomerInfo.Email, new { @class = "form-control", @required = "required", @placeholder = Resources.Email })
+                        @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Email)
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Order_FullName">@Resources.CheckIn</label>
+                        @Html.TextBoxFor(model => model.Order.CustomerInfo.CheckIn, new { @class = "form-control", @required = "required", @placeholder = Resources.CheckIn })
+                        @Html.ValidationMessageFor(model => model.Order.CustomerInfo.CheckIn)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Order_FullName">@Resources.CheckOut</label>
+                        @Html.TextBoxFor(model => model.Order.CustomerInfo.CheckOut, new { @class = "form-control", @required = "required", @placeholder = Resources.CheckOut })
+                        @Html.ValidationMessageFor(model => model.Order.CustomerInfo.CheckOut)
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>@Resources.Children</label>
+                        <select class="form-control" name="Order.CustomerInfo.Children">
+                            <option value="không có">Không có trẻ em</option>
+                            <option value="1 người lớn">1 trẻ em</option>
+                            <option value="2 người lớn">2 trẻ em</option>
+                            <option value="3 người lớn">3 trẻ em</option>
+                            <option value="4 người lớn">4 trẻ em</option>
+                            <option value="Nhiều trẻ em">Nhiều trẻ em</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>@Resources.Adults</label>
+                        <select class="form-control" name="Order.CustomerInfo.Adults">
+                            <option value="1 người lớn">1 người lớn</option>
+                            <option value="2 người lớn">2 người lớn</option>
+                            <option value="3 người lớn">3 người lớn</option>
+                            <option value="4 người lớn">4 người lớn</option>
+                            <option value="Nhóm người lớn">Nhóm người lớn</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Order_FullName">@Resources.Address</label>
+                @Html.TextBoxFor(model => model.Order.CustomerInfo.Address, new { @class = "form-control", @required = "required", @placeholder = Resources.Address })
+                @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Address)
+            </div>
+            <div class="form-group">
+                <label for="Order_FullName">@Resources.NumberPhone</label>
+                @Html.TextBoxFor(model => model.Order.CustomerInfo.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.NumberPhone })
+                @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Mobile)
+            </div>
+
+            <div class="form-group">
+                <label>@Resources.TypeRoom</label>
+                <select class="form-control" name="Order.Name">
+                    @foreach (var item in Model.KindOfRooms)
+                    {
+                        <option value="@item.Name">
+                            @item.Name
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">@Resources.BookRoom</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script>
+    $('.order-form').submit(function (e) {
+        e.preventDefault();
+        $.post("/Home/OderDetail", $(this).serialize(), function (data) {
+            if (data.status) {
+                $.toast({
+                    heading: "Contact successfully sent",
+                    text: data.msg,
+                    icon: "success"
+                })
+                $.fancybox.close();
+                $("#order-form").trigger("reset");
+            } else {
+                $.toast({
+                    heading: "Failed to send",
+                    text: data.msg,
+                    icon: "error"
+                })
+            }
+        });
+    });
+</script>

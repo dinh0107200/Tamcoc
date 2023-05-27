@@ -1,0 +1,270 @@
+﻿@model Tamcoc.ViewModel.HeaderViewModel
+@{
+    var config = Model.ConfigSiteDto;
+}
+<div class="container d-lg-block d-none">
+    <div class="header-top">
+        <div class="">
+            <div class="logo bg-white">
+                <a href="/">
+                    @if (config.Image != null)
+                    {
+                        <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif"  alt="@config.Title" class="lazyload" />
+                    }
+                </a>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between py-2">
+            <div class="header-top__item">
+                <a href="tel:@config.Hotline"><i class="fas fa-phone-alt pr-2"></i>@config.Hotline</a>
+            </div>
+            <div class="header-top__item">
+                <a href="mailto:@config.Email"><i class="fas fa-envelope pr-2"></i>@config.Email</a>
+            </div>
+            <div class="header-top__item position-relative " data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                @switch (Culture)
+                {
+                    case "en":
+                        <div class="lang">
+                            <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
+                            @Resources.English
+                            <i class="fas fa-angle-down pl-2"></i>
+                        </div>
+                        break;
+                    case "fr":
+                        <div class="lang">
+                            <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
+                            @Resources.French
+                            <i class="fas fa-angle-down pl-2"></i>
+                        </div>
+                        break;
+                    default:
+                        <div class="lang">
+                            <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
+                            @Resources.VietNam
+                            <i class="fas fa-angle-down pl-2"></i>
+                        </div>
+                        break;
+                }
+
+
+
+
+            <div class="collapse position-absolute box-lang-icon bg-white shadow" id="collapseExample">
+                @switch (Culture)
+                {
+                    case "en":
+                        <div class="box-lang mb-2">
+                            <a href="@Url.Action("Index",new {Culture = "vn"})">
+                                <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
+                                @Resources.VietNam
+                            </a>
+                        </div>
+                        <div class="box-lang">
+                            <a href="@Url.Action("Index",new {Culture = "fr"})">
+                                <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
+                                @Resources.French
+                            </a>
+                        </div>
+                        break;
+                    case "fr":
+                        <div class="box-lang mb-2">
+                            <a href="@Url.Action("Index",new {Culture = "vn"})">
+                                <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
+                                @Resources.VietNam
+                            </a>
+                        </div>
+                        <div class="box-lang">
+                            <a href="@Url.Action("Index",new {Culture = "en"})">
+                                <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
+                                @Resources.English
+                            </a>
+                        </div>
+                        break;
+                    default:
+                        <div class="box-lang mb-2">
+                            <a href="@Url.Action("Index",new {Culture = "en"})">
+                                <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
+                                @Resources.English
+                            </a>
+                        </div>
+                        <div class="box-lang">
+                            <a href="@Url.Action("Index",new {Culture = "fr"})">
+                                <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
+                                @Resources.French
+                            </a>
+                        </div>
+                        break;
+                }
+
+
+            </div>
+            </div>
+            <div class="header-top__item " onclick="Show()">
+                <i class="far fa-search pr-2"></i>@Resources.Search
+            </div>
+        </div>
+    </div>
+    <div class="header-main">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8">
+                <ul class="ul-reset ul-main py-4">
+                    <li><a href="/"><i class="fas fa-home-lg-alt"></i></a></li>
+                    <li><a href="@Url.Action("About", new {Culture})">@Resources.AboutUs</a></li>
+                    <li>
+                        <a href="@Url.Action("Room", new {Culture})">@Resources.Room</a>
+                        @if (Model.RoomDtos.Any())
+                        {
+                            <div class="drop">
+                                <ul class="sub-menu ul-reset ">
+                                    @foreach (var item in Model.RoomDtos.Where(a => !string.IsNullOrEmpty(a.Url)))
+                                    {
+                                        <li><a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})">@item.Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </li>
+                    @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null && !string.IsNullOrEmpty(a.Url)))
+                    {
+                        <li>
+                            <a href="@Url.Action("ArticleCategory", new {url = item.Url, Culture})">@item.CategoryName</a>
+                            @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
+                            {
+                            <div class="drop">
+                                <ul class="sub-menu ul-reset ">
+                                    @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
+                                    {
+                                        <li><a href="@Url.Action("ArticleCategory", new {url = child.Url , Culture})">@child.CategoryName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            }
+                        </li>
+                        
+                    }
+                    <li><a href="@Url.Action("Album", new {Culture})">@Resources.Library</a></li>
+                    <li><a href="@Url.Action("Contact", new {Culture})">@Resources.Contact</a></li>
+
+                </ul>
+            </div>
+            <div class="col-lg-2 d-flex align-items-center justify-content-end">
+                <div class="order-btn"><a href="@Url.Action("FormOrder", "Home")" data-fancybox data-type="ajax"><i class="far fa-calendar-check mr-1"></i>@Resources.BookRoom</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-search position-absolute shadow d-lg-block d-none">
+    <form action="@Url.Action("Search", new { Culture })" class="header-search">
+        <div class="input-group form-control d-flex justify-content-between">
+            <input type="text" autocomplete="off" required placeholder="@Resources.KeywordSearch..." name="keywords">
+            <div class="input-group-prepend">
+                <button type="submit">
+                    <i class="far fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="close" onclick="Hide()">
+        <i class="far fa-times"></i>
+    </div>
+</div>
+<div class="header-mb d-lg-none d-block ">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="bar" onclick="showMb()">
+                    <i class="far fa-bars"></i>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="mb-logo">
+                    <a href="/">
+                        @if (config.Image != null)
+                        {
+                            <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif" class="lazyload img-fluid" alt="@config.Title" />
+                        }
+                    </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-flex align-items-center h-100 justify-content-end">
+                    <a class="mr-1" href="@Url.Action("Index", new {Culture = "vn"})">VN</a>|
+                    <a class="mx-1" href="@Url.Action("Index", new {Culture = "en"})">EN</a>|
+                    <a class="ml-1" href="@Url.Action("Index", new {Culture = "Fr"})">FR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="menu-mb d-lg-none d-block">
+    <div class="close-mb text-white" onclick="HidenMb()">
+        <i class="far fa-times"></i>
+    </div>
+    <div class="main-mb mt-5">
+        <div class="p-2 mx-3">
+            <form class="d-flex" action="@Url.Action("Search","Home")">
+                <input class="w-100" type="search" name="keywords" value="" placeholder="@Resources.KeywordSearch" />
+                <button class="bg-white" type="submit"><i class="far fa-search"></i></button>
+            </form>
+        </div>
+        <ul class="ul-mb ul-reset">
+            <li class="li-mb">
+                <div class="p-2 mx-3">
+                    <a href="@Url.Action("About" , new {Culture})">@Resources.AboutUs</a>
+                </div>
+            </li>
+            <li class="li-mb">
+                <div class="p-2 mx-3">
+                    <a href="@Url.Action("Room", new {Culture})">@Resources.Room</a>
+                    @if (Model.RoomDtos.Any())
+                    {
+                        <i class="fas fa-caret-down"></i>
+                    }
+                </div>
+                @if (Model.RoomDtos.Any())
+                {
+                    <ul class="ul-reset ">
+                        @foreach (var item in Model.RoomDtos.Where(a => !string.IsNullOrEmpty(a.Url)))
+                        {
+                            <li class="p-2"><a class="mx-5" href="@Url.Action("RoomDetail", new {url = item.Url , Culture})">@item.Name</a></li>
+                        }
+                    </ul>
+                }
+            </li>
+            @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null && !string.IsNullOrEmpty(a.Url)))
+            {
+                <li class="li-mb">
+                    <div class="p-2 mx-3">
+                        <a href="@Url.Action("ArticleCategory", new {url = item.Url, Culture})">@item.CategoryName</a>
+                        @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id))
+                        {
+                            <i class="fas fa-caret-down"></i>
+                        }
+                    </div>
+                    @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id))
+                    {
+                        <ul class="ul-reset ">
+                            @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
+                            {
+                                <li class="p-2"><a class="mx-5" href="@Url.Action("ArticleCategory", new {url = child.Url , Culture})">@child.CategoryName</a></li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+            <li class="li-mb">
+                <div class="p-2 mx-3">
+                    <a href="@Url.Action("Album", new {Culture})">@Resources.Library</a>
+                </div>
+            </li>
+            <li class="li-mb">
+                <div class="p-2 mx-3">
+                    <a href="@Url.Action("Contact", new {Culture})">@Resources.Contact</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

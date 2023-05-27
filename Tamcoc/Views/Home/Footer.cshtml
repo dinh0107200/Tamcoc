@@ -1,0 +1,75 @@
+﻿@model Tamcoc.ViewModel.FooterViewModel
+    @{ 
+        var configs = Model.ConfigSiteDto;
+    }
+<section class="footer shadow">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="logo-footer">
+                    @if (configs.Image != null)
+                    {
+                        <img src="@Path.Combine("/images/configs/", configs.Image)" alt="@configs.Title" />
+                    }
+                </div>
+                @Html.Raw(configs.InfoFooter)
+            </div>
+            <div class="col-lg-4 mt-lg-0 mt-4   ">
+                <div class="footer-title mb-3">
+                    @Resources.FooterForm
+                </div>
+                <i>@Resources.FooterDes</i>
+                <form class="subcribe-form">
+                    @Html.AntiForgeryToken()
+                    <input type="email" name="email" value="" autocomplete="off" placeholder="Email Address..." />
+                </form>
+                <div class="footer-title mt-3">
+                   @Resources.FooterSocial
+                </div>
+                <ul class="share d-flex pl-0">
+                    <li>
+                        <a href="@configs.Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                        <a href="@configs.Twitter"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="@configs.Instagram"><i class="fab fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="@configs.Youtube"><i class="fab fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4 mt-lg-0 mt-4">
+                <div class="footer-title mb-1">
+                    Fanpage
+                </div>
+                @if (configs.Facebook != null)
+                {
+                    <div class="embed-responsive mt-4">
+                        <div class="fb-page" data-href="@configs.Facebook" data-tabs="" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="@configs.Facebook" class="fb-xfbml-parse-ignore">
+                                <a href="@configs.Facebook">@configs.Title</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="foote-show shadow bg-white d-lg-block d-none">
+            <ul class="ul-reset">
+                <li><a href="@Url.Action("About", new {Culture})">@Resources.AboutUs</a></li>
+                <li><a href="@Url.Action("Room", new {Culture})"></a>@Resources.Room</li>
+                @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ShowFooter))
+                {
+                    <li><a href="@Url.Action("ArticleDetail", new {url = item.Url , Culture})">@item.CategoryName</a></li>
+                }
+                <li><a href="@Url.Action("Contact", new {Culture})">@Resources.Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="backtop shadow">
+    <i class="fal fa-arrow-up"></i>
+</div>

@@ -1,0 +1,73 @@
+﻿@model Tamcoc.ViewModel.PropertyViewModel
+@{
+    ViewBag.Title = "Thêm thông số kỹ thuật";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thêm mới loại phòng</h2>
+@if (ViewBag.PropertyResult == "success")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới  thành công</strong></div>
+}
+@if (ViewBag.PropertyResult == "update")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật  thành công</strong></div>
+}
+<div class="box_content px-300 mt-4">
+    @using (Html.BeginForm("Property", "Room", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        <table class="form_table">
+            @Html.HiddenFor(model => model.KindOfRoom.Sort)
+            <tr>
+                @*<td class="form_name">
+                    @Html.LabelFor(m => m.TypeId)
+                </td>*@
+                <td class="form_text">
+                    @*<select name="TypeId" class="form_control w300" required="" data-tour="type">
+                        <option selected disabled>Hãy chọn thông số kỹ thuật</option>
+                        <option value="1" @if (Model.TypeId == 1) { @Html.Raw("selected='selected'") }>
+                            Tay thuận
+                        </option>
+                        <option value="2" @if (Model.TypeId == 2) { @Html.Raw("selected='selected'") }>
+                            Loft
+                        </option>
+                        <option value="3" @if (Model.TypeId == 3) { @Html.Raw("selected='selected'") }>
+                            Flex
+                        </option>
+                        <option value="4" @if (Model.TypeId == 4) { @Html.Raw("selected='selected'") }>
+                            Chiều dài
+                        </option>
+                        <option value="5" @if (Model.TypeId == 5) { @Html.Raw("selected='selected'") }>
+                            Bounce
+                        </option>
+                        <option value="6" @if (Model.TypeId == 6) { @Html.Raw("selected='selected'") }>
+                            Đối tượng
+                        </option>
+                        <option value="7" @if (Model.TypeId == 7) { @Html.Raw("selected='selected'") }>
+                            Loại gậy
+                        </option>
+                        <option value="8" @if (Model.TypeId == 8) { @Html.Raw("selected='selected'") }>
+                            Chất liệu
+                        </option>
+                    </select>*@
+                </td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Name)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td class="form_name">@Html.LabelFor(model => model.Sort)</td>
+                <td class="form_text">@Html.EditorFor(model => model.Sort)</td>
+            </tr>
+            <tr>
+                <td class="form_name"></td>
+                <td class="form_text">
+                    <input type="submit" class="btn quick-link" value="Thêm mới" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+@Html.Action("ListProperty", "Room")

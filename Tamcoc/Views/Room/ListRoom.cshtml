@@ -1,0 +1,98 @@
+﻿@model Tamcoc.ViewModel.ListRoomViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách phòng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Danh sách phòng</h2>
+@if (ViewBag.Result == "success")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Thêm mới phòng thành công</strong></div>
+}
+@if (ViewBag.Result == "update")
+{
+    <div id="AlertBox" class="alert alert-success"><strong>Cập nhật phòng thành công</strong></div>
+}
+<a class="btn quick-link" href="@Url.Action("Room")"><i class="fal fa-plus-circle mr-1"></i>Thêm phòng</a>
+<div class="box_content">
+    <form action="@Url.Action("ListRoom")" method="get">
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Từ khóa</label> @Html.TextBoxFor(a => a.Name, new { @class = "w300" })
+            </div>
+            <div class="col-lg-3 align-self-center">
+                <button type="submit" class="btn-search">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+    <p>Có tổng số <strong>@Model.Rooms.TotalItemCount</strong> phòng</p>
+    <table class="list_table tablecenter table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 100px">Ngày đăng</th>
+                <th style="width: 50px">Hình ảnh</th>
+                <th style="width: 300px">Tiêu đề</th>
+                <th>Hoạt động</th>
+                <th style="width: 230px"></th>
+            </tr>
+            @foreach (var room in Model.Rooms)
+            {
+                <tr data-id="@room.Id">
+                    <td>@Html.DisplayFor(model => room.CreateDate)</td>
+                    <td>
+                        @if (room.ListImage != null)
+                        {
+                            <a href="@Url.Action("RoomDetail", "Home", new {url = room.Url})" target="_blank"><img class="img-border" src="@Path.Combine("/images/room/", room.ListImage.Split(',')[0])?w=100&h=100" alt="" /></a>
+                        }
+                        else
+                        {
+                            @:NO PICTURE
+                        }
+                    </td>
+                    <td class="left">
+                        <a href="@Url.Action("UpdateRoom", new { roomId = room.Id })"><strong>@room.Name</strong></a>
+                    </td>
+                    <td>@Html.DisplayFor(model => room.Active)</td>
+                    <td>
+                        <a href="@Url.Action("UpadateRoomEn", new { roomId = room.Id })" data-fancybox data-type="iframe">Anh</a>-
+                        <a href="@Url.Action("UpadateRoomFr", new { roomId = room.Id })" data-fancybox data-type="iframe">Pháp</a>-
+                        @Html.ActionLink("Sửa", "UpdateRoom", new { roomId = room.Id }) -
+                        <a href="javascript:;" onclick="deleteRoom('@room.Id')" style="color: red;">Xóa</a>
+                    </td>
+                </tr>
+            }
+            @if (Model.Rooms.PageCount > 1)
+            {
+                <tr>
+                    <td colspan="8">@Html.PagedListPager(Model.Rooms, page => Url.Action("ListArticle", new { page,  name = Model.Name }))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function deleteRoom(id) {
+            if (confirm("Bạn có chắc chắn xóa bài viết này không?")) {
+                $.post("/Room/DeleteRoom", { roomId: id }, function (data) {
+                    if (data) {
+                        $.toast({
+                            text: 'Xóa bài viết thành công',
+                            position: 'bottom-right',
+                            icon: 'success',
+                        })
+                        $("tr[data-id='" + id + "']").fadeOut();
+                    }
+                    else {
+                        $.toast({
+                            text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                            icon: 'error',
+                        })
+                    }
+                });
+            }
+        }
+    </script>
+}
+

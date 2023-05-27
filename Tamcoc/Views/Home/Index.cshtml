@@ -1,0 +1,293 @@
+﻿@model Tamcoc.ViewModel.HomeViewModel
+@using Tamcoc.Models
+@{
+    var config = Model.ConfigSiteDto;
+    ViewBag.Title = config.Title;
+    ViewBag.Description = config.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Index", new { Culture });
+
+    var fb = Model.BannerDtos.FirstOrDefault(b => b.Image != null && b.GroupId == 1);
+    if (fb != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/banners/", fb.Image);
+    }
+}
+<div class="header">
+    @Html.Action("Header", "Home")
+</div>
+<section class="banner">
+    @foreach (var item in Model.BannerDtos.Take(1))
+    {
+        <div class="banner-video">
+            @if (item.Video != null)
+            {
+                <video autoplay muted loop>
+                    <source src="@Path.Combine("./images/banners/", item.Video)" type="video/mp4">
+                </video>
+            }
+            <div class="banner-slogan">
+                <p>@item.BannerName</p>
+                <span>@item.Slogan</span>
+            </div>
+        </div>
+    }
+</section>
+<section class="introduct">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="title">
+                    <div class="title_name">
+                        @Resources.IntroductTitle
+                    </div>
+                    <div class="title_text">
+                        Tamcoc Retreat
+                    </div>
+                </div>
+                <div class="introduct-about my-4">
+                    @Html.Raw(config.AboutText)
+                </div>
+                <div class="introduct-btn pt-2">
+                    <a href="@Url.Action("About", new {Culture})" class="btn-item">
+                        @Resources.AboutMore
+                        <i class="fas fa-caret-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="img-mask">
+                    <a href="@config.AboutUrl" data-fancybox class="play-img">
+                        <i class="fas fa-caret-circle-right"></i>
+                    </a>
+                    
+                    @if (config.AboutImage != null)
+                    {
+                        <img data-src="@Path.Combine("/images/configs/",config.AboutImage)" src="~/Content/images/img-main/base64.gif" alt="@config.Title" class="lazyload" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@if (Model.RoomDtos.Any(a => a.Home))
+{
+    <section class="room">
+        <div class="title text-center">
+            <div class="title_text text-center">
+                @Resources.RoomTitle
+            </div>
+            <div class="title_name text-center mt-2">
+                @Resources.RoomText
+            </div>
+        </div>
+        <div class="room-slick mt-4">
+            @foreach (var item in Model.RoomDtos.Where(a => a.Home))
+            {
+                <div class="room-slick__item">
+                    @if (item.ListImage != null)
+                    {
+                        <div class="room-slick__item_img">
+                            <img data-src="@Path.Combine("/images/room/", item.ListImage.Split(',')[0])" src="~/Content/images/img-main/base64.gif" alt="@item.Name" class="lazyload" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="room-slick__item_img">
+                            <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Name" class="lazyload" />
+                        </div>
+                    }
+
+                    <div class="room-slick__item__info">
+                        <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})" class="room-slick__name">@item.Name</a>
+                        <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})"><i class="fas fa-circle"></i>Xem chi tiết <i class="fas fa-circle"></i></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+}
+@if (Model.ArticleCategoryDtos.Any(a => a.ShowHome && a.TypePost == TypePost.Service))
+{
+    <section class="service">
+        <div class="container">
+            <div class="title">
+                <div class="title_text text-center">
+                    @Resources.ServiceTitle
+                </div>
+            </div>
+            <div class="row mt-lg-5">
+                <div class="col-lg-5">
+                    <div class="service-cat">
+                        @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ShowHome && a.TypePost == TypePost.Service))
+                        {
+
+                            <div class="title py-3">
+                                <div class="title_text">
+                                    @item.CategoryName
+                                </div>
+                                <div class="title_des py-2">
+                                    @Html.Raw(item.AboutText)
+                                </div>
+                                <a href="@Url.Action("ArticleCategory", new {url = item.Url , Culture})" class="btn-item mt-3">@Resources.AboutMore <i class="fas fa-caret-circle-right"></i></a>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="slider">
+                        @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.TypePost == TypePost.Service && a.ShowHome))
+                        {
+                            <div class="slide">
+                                @if (item.Image != null)
+                                {
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articleCategory/", item.Image)" alt="@item.CategoryName" class="image lazyload">
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+@if (Model.Album.Any())
+{
+    <section class="album">
+        <div class="title">
+            <div class="title_text text-center">
+                @Resources.Album
+            </div>
+        </div>
+        <div class="grid-content pt-4">
+            @foreach (var item in Model.Album)
+            {
+                if (!string.IsNullOrEmpty(item.ListImage))
+                {
+                    foreach (var ImgUrl in item.ListImage.Split(','))
+                    {
+                        <div class="grid-item">
+                            <div class="album-img">
+                                <img data-src="@Path.Combine("/images/banners/", ImgUrl)" src="~/Content/images/img-main/base64.gif" alt="@item.BannerName" class="lazyload" />
+                                <a href="@Path.Combine("/images/banners/", ImgUrl)" data-fancybox="group" class="view-album"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            }
+        </div>
+        <div class="btn-album text-center pt-5">
+            <a href="@Url.Action("Album", new {Culture})" class="btn-item">
+                @Resources.AboutMore
+                <i class="fas fa-caret-circle-right"></i>
+            </a>
+        </div>
+    </section>
+}
+@if (Model.ArticleDtos.Any())
+{
+    <section class="article">
+        <div class="container">
+            <div class="title">
+                <div class="title_text text-center">
+                    @Resources.ArticleTitle
+                </div>
+            </div>
+            <div class="row mt-4">
+                @foreach (var item in Model.ArticleDtos)
+                {
+                    <div class="col-lg-6">
+                        <div class="media">
+                            <div class="media-img mr-3">
+                                <a href="@Url.Action("ArticleDetail", new {url = item.Url ,Culture})">
+                                    @if (item.Image != null)
+                                    {
+                                        <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject" class="lazyload" />
+                                    }
+                                </a>
+                                <div class="article-cat">
+                                    <a href="@Url.Action("ArticleDetail", new {url = item.Url ,Culture})">@item.CategoryName</a>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <a href="@Url.Action("ArticleDetail", new {url = item.Url , Culture})" class="article-name truncate">@item.Subject</a>
+                                <div class="article-des truncate">
+                                    @item.Description
+                                </div>
+                                <div class="date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    @item.CreateDate.ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="view-article">
+                                    <a href="@Url.Action("ArticleDetail", new {url = item.Url, Culture})">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Xem thêm</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+
+}
+@if (Model.FeedbackDtos.Any())
+{
+    <section class="feedback overflow-hidden">
+        <div class="container">
+            <div class="title">
+                <div class="title_text text-center">
+                    @Resources.FeedbackTitle
+                </div>
+                <div class="title_des text-center">
+                    @config.AboutFeedback
+                </div>
+            </div>
+            <div class="slick-feedback">
+                @foreach (var item in Model.FeedbackDtos)
+                {
+                    <div class="slick-feedback__item">
+                        <div class="feedback_info">
+                            <div class="media">
+                                <div class="feedback-avt">
+                                    @if (item.Image != null)
+                                    {
+                                        <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/feedbacks/", item.Image)" alt="@item.Name" class="lazyload" />
+                                    }
+                                </div>
+                                <div class="media-info">
+                                    <p>@item.Name</p>
+                                    <div class="classtify">
+                                        @item.Classify
+                                    </div>
+                                    <div class="feedback-star">
+                                        <i class="fas fa-star"></i>
+                                        @item.Star
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feedback_des truncate">
+                                @item.Content
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+
+}
+@section scripts{
+    <script>
+        IndexJS()
+    </script>
+}

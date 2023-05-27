@@ -1,0 +1,36 @@
+﻿@model Tamcoc.ViewModel.IntroductViewModel
+@{
+        var config = Model.ConfigSiteDto;
+        ViewBag.Title = Resources.IntroductTitle;
+        ViewBag.Description = Resources.IntroductTitle;
+        ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Introduct", new { Culture });
+    }
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+        @Resources.IntroductTitle
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Resources.IntroductTitle</li>
+        </ol>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+            <div class="col-lg-6">
+                @Html.Raw(config.AboutText)
+            </div>
+            <div class="col-lg-6">
+                @if (config.AboutImage != null)
+                {
+                    <img data-src="@Path.Combine("/images/configs/", config.AboutImage)" src="~/Content/images/img-main/base64.gif" alt="@config.Title" class="lazyload img-fluid"/>
+                }
+            </div>
+        </div>
+</div>

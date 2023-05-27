@@ -1,0 +1,82 @@
+﻿@model Tamcoc.ViewModel.SearchViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = Resources.Search;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Search", Culture);
+    ViewBag.Robots = "noindex";
+}
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+        @Model.Keywords
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Keywords</li>
+        </ol>
+    </div>
+</nav>
+
+<div class="box-room">
+    <div class="container">
+        @if (Model.RoomDtos.Any())
+        {
+            foreach (var item in Model.RoomDtos)
+            {
+                <div class="box-room__item">
+                    <div class="col-12 col-sm-3 col-md-3">
+                        <div class="room-img">
+                            <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})">
+                                @if (item.ListImage != null)
+                                {
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/room/", item.ListImage.Split(',')[0])" alt="@item.Name" class="lazyload" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Name" class="lazyload" />
+                                }
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-7">
+                        <div class="room-info">
+                            <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})" class="room-name truncate">@item.Name</a>
+                            <div class="price-room">
+                                <strong>@item.Price</strong> |
+                                @item.People
+                            </div>
+                            <div class="room-view">
+                                <strong>@Resources.View:</strong>
+                                @item.View
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-2 col-md-2">
+                        <div class="btn-view">
+                            <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})" class="btn-item">@Resources.SeeMore</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            if (Model.RoomDtos.PageCount > 1)
+            {
+                <div class="col-12 text-center mt-3">
+                    @Html.PagedListPager(Model.RoomDtos, page => Url.Action("Search", new { page }))
+                </div>
+            }
+        }
+        else
+        {
+            <div>
+                <h3 class="font-weight-bold text-danger text-uppercase">@Resources.NoResult</h3>
+                <p>@Resources.Apology</p>
+            </div>
+        }
+
+    </div>
+</div>

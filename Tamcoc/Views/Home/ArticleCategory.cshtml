@@ -1,0 +1,77 @@
+﻿@model Tamcoc.ViewModel.ArticleCategoryViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = Model.CategoryDto.TitleMeta ?? Model.CategoryDto.CategoryName;
+    ViewBag.Description = Model.CategoryDto.DescriptionMeta ?? Model.CategoryDto.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleCategory", "Home", new { url = Model.CategoryDto.Url, Culture });
+}
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+        @Model.CategoryDto.CategoryName
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.CategoryDto.CategoryName</li>
+        </ol>
+    </div>
+</nav>
+<div class="box-room">
+    <div class="container">
+        @if (Model.ArticleDtos.Any())
+        {
+            foreach (var item in Model.ArticleDtos)
+            {
+                <div class="box-room__item">
+                    <div class="col-12 col-sm-3 col-md-3">
+                        <div class="room-img">
+                            <a href="@Url.Action("ArticleDetail", new {url = item.Url , Culture})">
+                                @if (item.Image != null)
+                                {
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject" class="lazyload" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Subject" class="lazyload" />
+                                }
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-7">
+                        <div class="room-info">
+                            <a href="@Url.Action("ArticleDetail", new {url = item.Url , Culture})" class="room-name truncate">@item.Subject</a>
+                            <div class="price-room">
+                                @item.Description
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-2 col-md-2">
+                        <div class="btn-view">
+                            <a href="@Url.Action("ArticleDetail", new {url = item.Url , Culture})" class="btn-item">@Resources.SeeMore</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            if (Model.ArticleDtos.PageCount > 1)
+            {
+                <div class="col-12 text-center mt-3">
+                    @Html.PagedListPager(Model.ArticleDtos, page => Url.Action("ArticleCategory", new { page }))
+                </div>
+            }
+
+
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="alert alert-success small">@Resources.Mess!!!!</p>
+            </div>
+        }
+
+    </div>
+</div>

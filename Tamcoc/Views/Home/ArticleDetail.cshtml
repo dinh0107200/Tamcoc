@@ -1,0 +1,90 @@
+﻿@model Tamcoc.ViewModel.ArticleDetailsViewModel
+@{
+    ViewBag.Title = Model.ArticleDto.TitleMeta ?? Model.ArticleDto.Subject;
+    ViewBag.Description = Model.ArticleDto.DescriptionMeta ?? Model.ArticleDto.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleDetail", new { Model.ArticleDto.Url, Culture });
+
+    if (Model.ArticleDto.Image != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/articles/", Model.ArticleDto.Image);
+    }
+}
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+       @Resources.Article
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Resources.Article</li>
+        </ol>
+    </div>
+</nav>
+<div class="article-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-4 order-lg-0 order-1">
+                <div class="article-detail-title pb-4">
+                    @Resources.NewPost
+                </div>
+                @foreach (var item in Model.ArticleDtos)
+                {
+                    <div class="new-article">
+                        <div class="new-article__img">
+                            <a href="@Url.Action("ArticleDetail" ,new {url = item.Url , Culture})">
+                                @if (item.Image != null)
+                                {
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject"  class="lazyload"/>
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Subject" />
+                                }
+                            </a>
+                        </div>
+                        <div class="new-article__body">
+                            <a href="@Url.Action("ArticleDetail" ,new {url = item.Url , Culture})" class="new-article__name truncate">@item.Subject</a>
+                            <div class="new-article__date mt-3">
+                                @item.CreateDate.ToString("dd/MM/yyyy")
+                            </div>
+                            
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-12 col-sm-12 col-md-8 order-lg-1 order-0">
+                <div class="article-detail-title">
+                    @Model.ArticleDto.Subject
+                </div>
+                <div class="detail-date">
+                    @Model.ArticleDto.CreateDate.ToString("dd/MM/yyyy")
+                    @Model.ArticleDto.CreateDate.ToString("HH:mm")
+                    <a href="@Url.Action("ArticleCategory", new {url = Model.ArticleDto.Url , Culture})">@Model.ArticleDto.CategoryName</a>
+                </div>
+                <div class="detail-content">
+                    @Html.Raw(Model.ArticleDto.Body)
+                </div>
+                <hr>
+                <div class="share">
+                    <ul class="d-flex align-items-center ul-reset">
+                        <li class="mr-3">@Resources.Share:</li>
+                        <li><button class="facebook" onclick="window.open('https://www.facebook.com/sharer.php?u='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-facebook-f"></i></button></li>
+                        <li><button class="instagram" onclick="window.open('https://www.instagram.com/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-instagram"></i></button></li>
+                        <li><button class="twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&amp;text='+encodeURIComponent(document.title));return false"><i class="fab fa-twitter"></i></button></li>
+                        <li><button class="linkedin" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent(document.title));return false"><i class="fab fa-linkedin-in"></i></button></li>
+                    </ul>
+                </div>
+                <hr />
+                <div class="fb-comments" data-href="@ViewBag.Canonical" data-numposts="10" data-width="100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+}

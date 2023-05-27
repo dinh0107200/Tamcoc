@@ -1,0 +1,153 @@
+﻿@model Tamcoc.ViewModel.RoomDetialViewModel
+@{
+    ViewBag.Title = Model.RoomDto.TitleMeta ?? Model.RoomDto.Name;
+    ViewBag.Description = Model.RoomDto.DescriptionMeta ?? Model.RoomDto.Description;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("RoomDetail", new { Model.RoomDto.Url, Culture });
+
+    if (Model.RoomDto.ListImage != null)
+    {
+        ViewBag.ImageShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/room/", Model.RoomDto.ListImage.Split(',')[0]);
+    }
+}
+
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+        @Model.RoomDto.Name
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.RoomDto.Name</li>
+        </ol>
+    </div>
+</nav>
+<div class="box-room-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-9">
+                <div class="boxProduct-detail-main">
+                    <div class="boxProduct-detail-title">
+                        <h3>@Model.RoomDto.Name</h3>
+                    </div>
+                    @if (Model.RoomDto.ListImage != null)
+                    {
+                        var arr = Model.RoomDto.ListImage.Split(',');
+                        <div class="room-main">
+                            @foreach (var item in arr)
+                            {
+                                <div class="room-main-img">
+                                    <img data-src="@Path.Combine("/images/room/", item)" src="~/Content/images/img-main/base64.gif" alt="@Model.RoomDto.Name" class="lazyload" />
+                                </div>
+                            }
+                        </div>
+                        
+                        <div class="room-nav">
+                            @foreach (var item in arr)
+                            {
+                                <div class="room-nav-img">
+                                    <img data-src="@Path.Combine("/images/room/", item)" src="~/Content/images/img-main/base64.gif" alt="@Model.RoomDto.Name" class="lazyload" />
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <div class="boxProduct-detail-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="boxProduct-detail-item">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-3">
+                                            <div class="boxProduct-detail-item-label">
+                                                @Resources.RoomInfo
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-9">
+                                            <div class="boxProduct-detail-item-content">
+                                                @Model.RoomDto.Description
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="boxProduct-detail-item">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-3">
+                                            <div class="boxProduct-detail-item-label">
+                                                @Resources.PeopleNumber
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-9">
+                                            <div class="boxProduct-detail-item-content">
+                                                @Model.RoomDto.People
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="boxProduct-detail-item">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-3">
+                                            <div class="boxProduct-detail-item-label">
+                                                @Resources.RoomPrice
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-9">
+                                            <div class="boxProduct-detail-item-content">
+                                                <Strong>@Model.RoomDto.Price</Strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="boxProduct-detail-item ">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-3">
+                                            <div class="boxProduct-detail-item-label">
+                                                @Resources.View
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-9">
+                                            <div class="boxProduct-detail-item-content">
+                                                @Model.RoomDto.View
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="boxProduct-detail-item border-bottom-0">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-3">
+                                            <div class="boxProduct-detail-item-label">
+                                                @Resources.Utilities
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-9">
+                                            <div class="boxProduct-detail-item-content">
+                                                @Html.Raw(Model.RoomDto.Body)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-3 mt-lg-0 mt-3">
+                @Html.Action("FormOderDetail", "Home", new { id = Model.RoomDto.Id })
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+}

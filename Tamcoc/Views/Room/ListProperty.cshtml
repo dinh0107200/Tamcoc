@@ -1,0 +1,53 @@
+﻿@model Tamcoc.ViewModel.ListPropertyViewModel
+
+<table class="list_table tablecenter">
+    <tr>
+        <th style="width: 100px">STT</th>
+        <th>Tên thông số kỹ thuật</th>
+        <th style="width: 140px;"></th>
+    </tr>
+    <tbody id="sortable-cat">
+        @if (Model.KindOfRooms.Any())
+        {
+            <tr>
+                <td colspan="3">
+                    <strong>Loại phòng</strong>
+                </td>
+            </tr>
+        }
+        @foreach (var kind in Model.KindOfRooms)
+        {
+            <tr data-id="@kind.Id" style="background: #ededed;">
+                <td>
+                    @Html.DisplayFor(a => kind.Sort)
+                </td>
+                <td class="left"><strong>@kind.Name</strong></td>
+                <td>
+                    @Html.ActionLink("Sửa", "UpdateProperty", new { kindOfRoom = kind.Id }) -
+                    <a href="javascript:;" onclick="DeleteKind('@kind.Id')" style="color: red">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    function DeleteKind(id) {
+        if (confirm("Bạn có chắc chắn xóa loại này không?")) {
+            $.post("/Room/DeleteProperty", { kindOfRoom: id }, function (data) {
+                if (data) {
+                    $.toast({
+                        text: 'Đang xóa loại phòng',
+                        position: 'bottom-right',
+                        icon: 'success',
+                    })
+                    $("tr[data-id='" + id + "']").fadeOut();
+                } else {
+                    $.toast({
+                        text: 'Quá trình thực hiện không thành công. Hãy thử lại',
+                        icon: 'error',
+                    })
+                }
+            });
+        }
+    }
+</script>

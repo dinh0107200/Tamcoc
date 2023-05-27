@@ -1,0 +1,70 @@
+﻿@model Tamcoc.Models.Feedback
+@{
+    Layout = "~/Views/Shared/_AdminIframeLayout.cshtml";
+    var feedbackVi = Model.FeedbackEn.SingleOrDefault(a => a.FeedbackId == Model.Id && a.LanguageId == 2);
+}
+
+<div>
+    <h2>Cập nhật tiếng anh</h2>
+    <div class="box_content px-300">
+        @if (ViewBag.Result == 1)
+        {
+            <div id="AlertBox" class="alert alert-success"><strong>Cập nhật thành công</strong></div>
+        }
+        @using (Html.BeginForm("UpdateFeedbackEn", "Contact", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+            <input type="hidden" name="FeedbackId" value="@Model.Id" />
+            <input type="hidden" name="LangId" value="2" />
+            <input type="hidden" name="Star" value="@Model.Star" />
+            <input type="hidden" name="Img" value="@Model.Image" />
+            <table class="form_table">
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text"><strong>@Model.Name</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Tên banner</td>
+                    <td class="form_text">
+                        <input type="text" name="Name" required="" maxlength="100" class="form_control w300" value="@(feedbackVi?.Name)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        <div class="mask-body">
+                            @Html.Raw(Model.Classify)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Chức vụ</td>
+                    <td class="form_text">
+                        <input type="text" name="Classify" value="@(feedbackVi?.Classify)" class="form_control w300" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Bài gốc</td>
+                    <td class="form_text">
+                        <div class="mask-body">
+                            @Html.Raw(Model.Content)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form_name">Nội dung</td>
+                    <td class="form_text">
+                        <textarea class="multi-line" cols="20" data-val="true" data-val-length="Tối đa 700 ký tự" data-val-length-max="700" id="Content" name="Content" rows="6">
+                            @(feedbackVi?.Content)
+                    </textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form_name"></td>
+                    <td class="form_text"><input type="submit" class="quick-link" value="Cập nhật" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

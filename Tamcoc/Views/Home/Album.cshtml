@@ -1,0 +1,62 @@
+﻿@model Tamcoc.ViewModel.AlbumViewModel
+@{
+    var config = Model.ConfigSiteDto;
+    ViewBag.Title = Resources.Contact;
+    ViewBag.Description = Resources.Contact;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Album", new { Culture });
+}
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+        @Resources.Album
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @Resources.Album
+            </li>
+        </ol>
+    </div>
+</nav>
+<div class="list-album">
+    <div class="list-album__item">
+        <div class="container">
+            @foreach (var item in Model.Album)
+            {
+                <div class="title">
+                    <div class="title_text text-center">
+                        @item.BannerName
+                    </div>
+                </div>
+                <div class="img-album row mt-4">
+                    @if (!string.IsNullOrEmpty(item.ListImage))
+                    {
+                        int index = 0;
+                        <div id="fancybox-group-@index" style="display: none;">
+                            @foreach (var Urlimg in item.ListImage.Split(','))
+                            {
+                                <a href="@Path.Combine("/images/banners/", Urlimg)" data-fancybox="fancybox-group-@index">
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/banners/", Urlimg)" alt="@item.BannerName" class="lazyload" />
+                                </a>
+                                index++;
+                            }
+                        </div>
+                        foreach (var Urlimg in item.ListImage.Split(','))
+                        {
+                            <div class="img-album_item col-6 col-md-3 col-sm-3 px-0">
+                                <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/banners/", Urlimg)" alt="@item.BannerName" class="lazyload" />
+                                <a href="@Path.Combine("/images/banners/", Urlimg)" data-fancybox="group_@index" class="view-album"><i class="fas fa-plus"></i></a>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

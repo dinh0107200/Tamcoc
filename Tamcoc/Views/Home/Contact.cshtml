@@ -1,0 +1,75 @@
+﻿@model Tamcoc.ViewModel.ContactViewModel
+@{
+    var config = Model.ConfigSiteDto;
+    ViewBag.Title = Resources.Contact;
+    ViewBag.Description = Resources.Contact;
+    ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Contact", new { Culture });
+}
+<div class="header active position-sticky top bg-white">
+    @Html.Action("Header", "Home")
+</div>
+<div class="banner-page">
+    <div class="name-page">
+       @Resources.Contact
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="bg-light">
+    <div class="container">
+        <ol class="breadcrumb bg-light">
+            <li class="breadcrumb-item"><a href="/">@Resources.Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Resources.Contact</li>
+        </ol>
+    </div>
+</nav>
+
+<div class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-12 order-lg-0 order-1">
+                @if (config.GoogleMap != null)
+                {
+                    <div class="embed-responsive embed-responsive-16by9 map h-100">
+                        @Html.Raw(config.GoogleMap)
+                    </div>
+                }
+            </div>
+            <div class="col-md-6 col-12 order-lg-1 order-0">
+                <div class="title">
+                    <div class="title_text">
+                        @Resources.ContactTitle
+                    </div>
+                    <div class="title_des">
+                        @Resources.ContactDes
+                    </div>
+                </div>
+                <form class="mt-3 contact-form">
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="Contact_FullName">@Resources.FullName</label>
+                        @Html.TextBoxFor(model => model.Contact.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
+                        @Html.ValidationMessageFor(model => model.Contact.FullName)
+                    </div>
+                    <div class="form-group">
+                        <label for="Contact_Mobile">@Resources.NumberPhone</label>
+                        @Html.TextBoxFor(model => model.Contact.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.NumberPhone })
+                        @Html.ValidationMessageFor(model => model.Contact.Mobile)
+                    </div>
+                    <div class="form-group">
+                        <label for="Contact_Email">@Resources.Email</label>
+                        @Html.TextBoxFor(model => model.Contact.Email, new { @class = "form-control", @placeholder = Resources.Email })
+                        @Html.ValidationMessageFor(model => model.Contact.Email)
+                    </div>
+                    <div class="form-group">
+                        <label for="Contact_Body">@Resources.Body</label>
+                        @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Body , @class = "form-control",})
+                        @Html.ValidationMessageFor(model => model.Contact.Body)
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn-item">@Resources.BtnSubmit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

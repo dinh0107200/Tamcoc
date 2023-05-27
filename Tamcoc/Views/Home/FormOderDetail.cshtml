@@ -1,0 +1,74 @@
+﻿@model Tamcoc.ViewModel.FormDetailViewModel
+<div class="frm-booking-rooms">
+    <div class="booking-rooms-title boxProduct-detail-title">
+        <h3>@Resources.BookRoom</h3>
+    </div>
+    <form id="order-form">
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="Order.Name" value="@Model.RoomDto.Name" />
+        <input type="hidden" name="Order.RoomId" value="@Model.RoomDto.Id" />
+        <div class="form-group">
+            <label for="Order_FullName">@Resources.FullName</label>
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.FullName)
+        </div>
+        <div class="form-group">
+            <label for="Order_FullName">@Resources.NumberPhone</label>
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.NumberPhone })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Mobile)
+        </div>
+        <div class="form-group">
+            <label for="Order_FullName">@Resources.Email</label>
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.Email, new { @class = "form-control", @required = "required", @placeholder = Resources.Email })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Email)
+        </div>
+        <div class="form-group">
+            <label for="Order_FullName">@Resources.Address</label>
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.Address, new { @class = "form-control", @required = "required", @placeholder = Resources.Address })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.Address)
+        </div>
+        <div class="form-group">
+            <label for="Order_FullName">@Resources.CheckIn</label>
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.CheckIn, new { @class = "form-control", @required = "required", @placeholder = Resources.CheckIn })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.CheckIn)
+        </div>
+        <div class="form-group">
+            <label for="Order_FullName">@Resources.CheckOut</label>
+            @Html.TextBoxFor(model => model.Order.CustomerInfo.CheckOut, new { @class = "form-control", @required = "required", @placeholder = Resources.CheckOut })
+            @Html.ValidationMessageFor(model => model.Order.CustomerInfo.CheckOut)
+        </div>
+        <div class="form-group">
+            <label>@Resources.AboutUs</label>
+            <select class="form-control" name="Order.CustomerInfo.Adults">
+                <option value="1 người lớn">1 người lớn</option>
+                <option value="2 người lớn">2 người lớn</option>
+                <option value="3 người lớn">3 người lớn</option>
+                <option value="4 người lớn">4 người lớn</option>
+                <option value="Nhóm người lớn">Nhóm người lớn</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>@Resources.Children</label>
+            <select class="form-control" name="Order.CustomerInfo.Children">
+                <option value="không có">Không có trẻ em</option>
+                <option value="1 người lớn">1 trẻ em</option>
+                <option value="2 người lớn">2 trẻ em</option>
+                <option value="3 người lớn">3 trẻ em</option>
+                <option value="4 người lớn">4 trẻ em</option>
+                <option value="Nhiều trẻ em">Nhiều trẻ em</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>@Resources.TypeRoom</label>
+            <input type="text" disabled value="@Model.RoomDto.Name" class="form-control">
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Order.CustomerInfo.Body)
+            @Html.TextAreaFor(a => a.Order.CustomerInfo.Body, new { @class = "form-control", placeholder = Resources.Body })
+        </div>
+        <div class="form-group">
+            <button>@Resources.BookRoom</button>
+        </div>
+    </form>
+</div>
