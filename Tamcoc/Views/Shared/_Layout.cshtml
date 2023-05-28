@@ -7,19 +7,19 @@
 <head xmlns="http://www.w3.org/1999/xhtml" prefix="og:http://ogp.me/ns# fb:http://www.facebook.com/2008/fbml">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Refresh" content="300">
     <title>@ViewBag.Title</title>
     <meta name="description" content="@Html.Raw(ViewBag.Description)" />
-    <meta name="robots" content="@(ViewBag.Robots == null ? "index,follow" : ViewBag.Robots)" />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="@ViewBag.Canonical" />
-    <link rel="shortcut icon" href="@Path.Combine("/images/configs/", config.Image)">
+    <link rel="shortcut icon" href="@Path.Combine("/images/configs/", config.Favicon)?w=64&h=64">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:type" content="website">
     <meta property="og:title" content="@Html.Raw(ViewBag.Title)">
     <meta property="og:description" content="@Html.Raw(ViewBag.Description)">
     <meta property="og:url" content="@ViewBag.Canonical">
     <meta property="og:site_name" content="@Html.Raw(ViewBag.Title)">
-    <meta property="og:image" content="@(ViewBag.ImagShare ?? Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/configs/", config.Image))" />
+    <meta property="og:image" content="@(ViewBag.ImageShare ?? Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/configs/", config.Image))" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
