@@ -208,16 +208,10 @@ namespace Tamcoc.Controllers
             };
             return View(model);
         }
-        //public ActionResult Library()
-        //{
-        //    var model = new AlbumViewModel
-        //    {
-        //        Album = BannerDtos().Where(a => a.GroupId == 3).OrderBy(a => a.Sort),
-        //    };
-        //    return View(model);
-        //}
 
         [HttpGet, LanguageFilters]
+        [Route("{culture:regex(^(?!.*vi).*$)}/booking", Order = 1)]
+        [Route("{culture=vi}/dat-phong", Order = 2)]
         public PartialViewResult FormOrder()
         {
             var kind = _unitOfWork.KindOfRoomRepository.Get();

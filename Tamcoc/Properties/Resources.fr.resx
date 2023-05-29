@@ -126,6 +126,21 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="Adult1" xml:space="preserve">
+    <value>1 Adulte</value>
+  </data>
+  <data name="Adult2" xml:space="preserve">
+    <value>2 Adulte</value>
+  </data>
+  <data name="Adult3" xml:space="preserve">
+    <value>3 Adulte</value>
+  </data>
+  <data name="Adult4" xml:space="preserve">
+    <value>4 Adulte</value>
+  </data>
+  <data name="AdultGroup" xml:space="preserve">
+    <value>Groupe adulte</value>
+  </data>
   <data name="Adults" xml:space="preserve">
     <value>Nombre d'adultes</value>
   </data>
@@ -159,6 +174,18 @@
   <data name="Children" xml:space="preserve">
     <value>Nombre d'enfants</value>
   </data>
+  <data name="Children1" xml:space="preserve">
+    <value>1 Enfant</value>
+  </data>
+  <data name="Children2" xml:space="preserve">
+    <value>2 Enfant</value>
+  </data>
+  <data name="Children3" xml:space="preserve">
+    <value>3 Enfant</value>
+  </data>
+  <data name="Children4" xml:space="preserve">
+    <value>4 Enfant</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
@@ -175,7 +202,7 @@
     <value>Anglais</value>
   </data>
   <data name="FeedbackTitle" xml:space="preserve">
-    <value>Les clients parlent de nous</value>
+    <value>Retour</value>
   </data>
   <data name="FooterDes" xml:space="preserve">
     <value>Entrez votre adresse e-mail pour notre liste de diffusion afin de vous tenir au courant.</value>
@@ -215,6 +242,9 @@
   </data>
   <data name="NewPost" xml:space="preserve">
     <value>Nouveau poste</value>
+  </data>
+  <data name="NoChildren" xml:space="preserve">
+    <value>Pas d'enfants</value>
   </data>
   <data name="NoResult" xml:space="preserve">
     <value>Pas de résultat.</value>

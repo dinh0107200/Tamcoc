@@ -88,6 +88,51 @@ namespace Tamcoc.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 người lớn.
+        /// </summary>
+        public static string Adult1 {
+            get {
+                return ResourceManager.GetString("Adult1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 người lớn.
+        /// </summary>
+        public static string Adult2 {
+            get {
+                return ResourceManager.GetString("Adult2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 người lớn.
+        /// </summary>
+        public static string Adult3 {
+            get {
+                return ResourceManager.GetString("Adult3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 người lớn.
+        /// </summary>
+        public static string Adult4 {
+            get {
+                return ResourceManager.GetString("Adult4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm người lớn.
+        /// </summary>
+        public static string AdultGroup {
+            get {
+                return ResourceManager.GetString("AdultGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Số lượng người lớn.
         /// </summary>
         public static string Adults {
@@ -183,6 +228,42 @@ namespace Tamcoc.Properties {
         public static string Children {
             get {
                 return ResourceManager.GetString("Children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 trẻ em.
+        /// </summary>
+        public static string Children1 {
+            get {
+                return ResourceManager.GetString("Children1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 trẻ em.
+        /// </summary>
+        public static string Children2 {
+            get {
+                return ResourceManager.GetString("Children2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 trẻ em.
+        /// </summary>
+        public static string Children3 {
+            get {
+                return ResourceManager.GetString("Children3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 trẻ em.
+        /// </summary>
+        public static string Children4 {
+            get {
+                return ResourceManager.GetString("Children4", resourceCulture);
             }
         }
         
@@ -354,6 +435,15 @@ namespace Tamcoc.Properties {
         public static string NewPost {
             get {
                 return ResourceManager.GetString("NewPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không có trẻ em.
+        /// </summary>
+        public static string NoChildren {
+            get {
+                return ResourceManager.GetString("NoChildren", resourceCulture);
             }
         }
         

@@ -386,7 +386,7 @@ input {
     .logo {
         width: 100px;
         position: absolute;
-        top: 0;
+        top: -60%;
 
         img {
             width: 100%;
@@ -397,21 +397,25 @@ input {
 }
 
 .order-btn {
-    padding: 10px;
-    color: $white;
-    background: $colorMain;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    border-radius: 20px;
-    width: 70%;
     text-align: center;
-
     a {
+        color: $white;
+        background: $colorMain;
+        border-radius: 20px;
+        width: 70%;
+        padding: 10px 15px;
         font-weight: 400;
         font-size: 14px;
         color: $colorMain2;
         line-height: 17px;
+        transition:all .5s;
+        &:hover{
+            background:$colorMain2;
+            color:$white;
+        }
     }
 }
 
@@ -529,9 +533,19 @@ input {
     padding: 10px 20px;
     border-radius: 3px;
     cursor: pointer;
+    transition: all .5s;
+
+    i {
+        transition: all .5s;
+    }
 
     &:hover {
         color: $white;
+        background: $colorMain;
+
+        i {
+            transform: translateX(5px);
+        }
     }
 }
 
@@ -560,6 +574,16 @@ input {
 
     .room-slick__item {
         position: relative;
+
+        &:hover {
+            .room-slick__item_img {
+                img {
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
 
         &:before {
             content: "";
@@ -598,10 +622,19 @@ input {
             }
         }
 
-        img {
-            width: 100%;
-            object-fit: cover;
-            aspect-ratio: 7/6;
+        .room-slick__item_img {
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                aspect-ratio: 7/6;
+                transition: all .5s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
         }
 
         .room-slick__item__info {
@@ -892,11 +925,15 @@ input {
 
         .media-img {
             position: relative;
-
+            overflow:hidden;
             img {
                 width: 300px;
                 object-fit: cover;
                 aspect-ratio: 1.5;
+                transition:all .5s;
+                &:hover{
+                    transform:scale(1.1);
+                }
             }
 
             .article-cat {
@@ -924,6 +961,9 @@ input {
                 @include Bold;
                 -webkit-line-clamp: 2;
                 height: 54px;
+                &:hover{
+                    color:$colorMain;
+                }
             }
 
             .article-des {

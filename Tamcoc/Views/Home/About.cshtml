@@ -21,16 +21,34 @@
         </ol>
     </div>
 </nav>
-<div class="container">
-    <div class="row">
-            <div class="col-lg-6">
-                @Html.Raw(config.AboutText)
+<section class="introduct">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="title">
+                    <div class="title_name">
+                        @Resources.IntroductTitle
+                    </div>
+                    <div class="title_text">
+                        Tamcoc Retreat
+                    </div>
+                </div>
+                <div class="introduct-about my-4">
+                    @Html.Raw(config.AboutText)
+                </div>
             </div>
-            <div class="col-lg-6">
-                @if (config.AboutImage != null)
-                {
-                    <img data-src="@Path.Combine("/images/configs/", config.AboutImage)" src="~/Content/images/img-main/base64.gif" alt="@config.Title" class="lazyload img-fluid"/>
-                }
+            <div class="col-lg-5">
+                <div class="img-mask">
+                    <a href="@config.AboutUrl" data-fancybox class="play-img">
+                        <i class="fas fa-caret-circle-right"></i>
+                    </a>
+
+                    @if (config.AboutImage != null)
+                    {
+                        <img data-src="@Path.Combine("/images/configs/",config.AboutImage)" src="~/Content/images/img-main/base64.gif" alt="@config.Title" class="lazyload" />
+                    }
+                </div>
             </div>
         </div>
-</div>
+    </div>
+</section>

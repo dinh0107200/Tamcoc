@@ -35,7 +35,7 @@
 <section class="introduct">
     <div class="container">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-7" data-aos-duration="700" data-aos-delay="300" data-aos="zoom-in">
                 <div class="title">
                     <div class="title_name">
                         @Resources.IntroductTitle
@@ -54,7 +54,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5" data-aos-duration="700" data-aos-delay="500" data-aos="zoom-in">
                 <div class="img-mask">
                     <a href="@config.AboutUrl" data-fancybox class="play-img">
                         <i class="fas fa-caret-circle-right"></i>
@@ -71,6 +71,7 @@
 </section>
 @if (Model.RoomDtos.Any(a => a.Home))
 {
+    var delay = 200;
     <section class="room">
         <div class="title text-center">
             <div class="title_text text-center">
@@ -83,7 +84,7 @@
         <div class="room-slick mt-4">
             @foreach (var item in Model.RoomDtos.Where(a => a.Home))
             {
-                <div class="room-slick__item">
+                <div class="room-slick__item" data-aos-duration="700" data-aos-delay="@delay" data-aos="zoom-in">
                     @if (item.ListImage != null)
                     {
                         <div class="room-slick__item_img">
@@ -102,6 +103,7 @@
                         <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})"><i class="fas fa-circle"></i>Xem chi tiết <i class="fas fa-circle"></i></a>
                     </div>
                 </div>
+                delay += 200;
             }
         </div>
     </section>
@@ -156,6 +158,7 @@
 }
 @if (Model.Album.Any())
 {
+    var delay = 200;
     <section class="album">
         <div class="title">
             <div class="title_text text-center">
@@ -169,12 +172,13 @@
                 {
                     foreach (var ImgUrl in item.ListImage.Split(','))
                     {
-                        <div class="grid-item">
+                        <div class="grid-item" data-aos-duration="700" data-aos-delay="@delay" data-aos="zoom-in">
                             <div class="album-img">
                                 <img data-src="@Path.Combine("/images/banners/", ImgUrl)" src="~/Content/images/img-main/base64.gif" alt="@item.BannerName" class="lazyload" />
                                 <a href="@Path.Combine("/images/banners/", ImgUrl)" data-fancybox="group" class="view-album"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
+                        delay += 200;
                     }
 
                 }
@@ -191,6 +195,7 @@
 }
 @if (Model.ArticleDtos.Any())
 {
+    var delay = 200;
     <section class="article">
         <div class="container">
             <div class="title">
@@ -199,9 +204,9 @@
                 </div>
             </div>
             <div class="row mt-4">
-                @foreach (var item in Model.ArticleDtos)
+                @foreach (var item in Model.ArticleDtos.Take(4))
                 {
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" data-aos-duration="700" data-aos-delay="@delay" data-aos="zoom-in">
                         <div class="media">
                             <div class="media-img mr-3">
                                 <a href="@Url.Action("ArticleDetail", new {url = item.Url ,Culture})">
@@ -211,7 +216,7 @@
                                     }
                                 </a>
                                 <div class="article-cat">
-                                    <a href="@Url.Action("ArticleDetail", new {url = item.Url ,Culture})">@item.CategoryName</a>
+                                    <a href="@Url.Action("ArticleCategory", new {url = item.CategoryUrl ,Culture})">@item.CategoryName</a>
                                 </div>
                             </div>
                             <div class="media-body">
@@ -232,7 +237,7 @@
                             </div>
                         </div>
                     </div>
-
+                    delay += 200;
                 }
             </div>
         </div>

@@ -7,7 +7,6 @@
             <div class="form-row">
                 <div class="col-lg-6">
                     <div class="form-group">
-
                         <label for="Order_FullName">@Resources.FullName</label>
                         @Html.TextBoxFor(model => model.Order.CustomerInfo.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
                         @Html.ValidationMessageFor(model => model.Order.CustomerInfo.FullName)
@@ -42,12 +41,11 @@
                     <div class="form-group">
                         <label>@Resources.Children</label>
                         <select class="form-control" name="Order.CustomerInfo.Children">
-                            <option value="không có">Không có trẻ em</option>
-                            <option value="1 người lớn">1 trẻ em</option>
-                            <option value="2 người lớn">2 trẻ em</option>
-                            <option value="3 người lớn">3 trẻ em</option>
-                            <option value="4 người lớn">4 trẻ em</option>
-                            <option value="Nhiều trẻ em">Nhiều trẻ em</option>
+                            <option value="@Resources.NoChildren">@Resources.NoChildren</option>
+                            <option value="@Resources.Children1">@Resources.Children1</option>
+                            <option value="@Resources.Children2">@Resources.Children2</option>
+                            <option value="@Resources.Children3">@Resources.Children3</option>
+                            <option value="@Resources.Children4">@Resources.Children4</option>
                         </select>
                     </div>
                 </div>
@@ -55,11 +53,11 @@
                     <div class="form-group">
                         <label>@Resources.Adults</label>
                         <select class="form-control" name="Order.CustomerInfo.Adults">
-                            <option value="1 người lớn">1 người lớn</option>
-                            <option value="2 người lớn">2 người lớn</option>
-                            <option value="3 người lớn">3 người lớn</option>
-                            <option value="4 người lớn">4 người lớn</option>
-                            <option value="Nhóm người lớn">Nhóm người lớn</option>
+                            <option value="@Resources.Adult1">@Resources.Adult1</option>
+                            <option value="@Resources.Adult2">@Resources.Adult2</option>
+                            <option value="@Resources.Adult3">@Resources.Adult3</option>
+                            <option value="@Resources.Adult4">@Resources.Adult4</option>
+                            <option value="@Resources.AdultGroup">@Resources.AdultGroup</option>
                         </select>
                     </div>
                 </div>

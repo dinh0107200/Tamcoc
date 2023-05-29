@@ -126,6 +126,21 @@
   <data name="Address" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
+  <data name="Adult1" xml:space="preserve">
+    <value>1 người lớn</value>
+  </data>
+  <data name="Adult2" xml:space="preserve">
+    <value>2 người lớn</value>
+  </data>
+  <data name="Adult3" xml:space="preserve">
+    <value>3 người lớn</value>
+  </data>
+  <data name="Adult4" xml:space="preserve">
+    <value>4 người lớn</value>
+  </data>
+  <data name="AdultGroup" xml:space="preserve">
+    <value>Nhóm người lớn</value>
+  </data>
   <data name="Adults" xml:space="preserve">
     <value>Số lượng người lớn</value>
   </data>
@@ -158,6 +173,18 @@
   </data>
   <data name="Children" xml:space="preserve">
     <value>Số lượng trẻ em</value>
+  </data>
+  <data name="Children1" xml:space="preserve">
+    <value>1 trẻ em</value>
+  </data>
+  <data name="Children2" xml:space="preserve">
+    <value>2 trẻ em</value>
+  </data>
+  <data name="Children3" xml:space="preserve">
+    <value>3 trẻ em</value>
+  </data>
+  <data name="Children4" xml:space="preserve">
+    <value>4 trẻ em</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Liên hệ</value>
@@ -215,6 +242,9 @@
   </data>
   <data name="NewPost" xml:space="preserve">
     <value>Bài viết mới nhất</value>
+  </data>
+  <data name="NoChildren" xml:space="preserve">
+    <value>Không có trẻ em</value>
   </data>
   <data name="NoResult" xml:space="preserve">
     <value>Không có kết quả.</value>
