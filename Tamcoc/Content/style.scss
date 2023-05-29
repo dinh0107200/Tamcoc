@@ -232,15 +232,16 @@ input {
 
         form {
             width: 80%;
-            input{
-                width:90%;
+
+            input {
+                width: 90%;
             }
         }
 
-        .close{
-            position:absolute;
-            top:30px;
-            right:30px;
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
         }
     }
 
@@ -383,8 +384,7 @@ input {
     }
 
     .logo {
-        width: 130px;
-        height: 110px;
+        width: 100px;
         position: absolute;
         top: 0;
 
@@ -517,10 +517,12 @@ input {
         }
     }
 }
-.box-lang-icon{
-    z-index:1;
-    top:100%;
+
+.box-lang-icon {
+    z-index: 1;
+    top: 100%;
 }
+
 .btn-item {
     background: $colorMain2;
     color: $white;
@@ -532,8 +534,10 @@ input {
         color: $white;
     }
 }
+
 .box-lang {
-    padding:5px;
+    padding: 5px;
+
     a {
         color: $black;
     }
@@ -544,6 +548,7 @@ input {
         object-fit: cover;
     }
 }
+
 .room {
     padding: 30px 0;
 
@@ -699,16 +704,17 @@ input {
         height: 100%;
         display: flex;
         align-items: center;
-        position:relative;
-        &:before{
-            content:"";
-            position:absolute;
-            width:100%;
-            height:100%;
-            background:url('./images/img-main/QUY-CACH-LOGO-TAMCOC-RETREAT 2.png');
-            background-size:contain;
-            background-repeat:no-repeat;
-            background-position:center;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('./images/img-main/QUY-CACH-LOGO-TAMCOC-RETREAT 2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
     }
 
@@ -774,20 +780,22 @@ input {
         z-index: 1;
     }
 }
-.backtop{
-    width:50px;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:$colorMain;
-    color:$white;
-    position:fixed;
-    right:30px;
-    bottom:30px;
-    cursor:pointer;
+
+.backtop {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $colorMain;
+    color: $white;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
 }
+
 .album {
     padding: 30px 0;
     background: #F8EDDB;
@@ -1135,17 +1143,27 @@ input {
 
     form {
         margin-top: 10px;
-        padding: 5px;
         border: 1px solid $colorMain2;
         border-radius: 5px;
+        overflow: hidden;
 
         input {
-            width: 100%;
+            border: 0;
+        }
+
+        .input-group-append {
+            position: absolute;
+            right: 1px;
+            z-index: 9;
+        }
+
+        .btn {
+            color: $colorMain2;
         }
     }
 
     .share {
-        margin-top: 30px;
+        margin-top: .5rem;
 
         li {
             width: 30px;
@@ -1165,9 +1183,7 @@ input {
 
     .logo-footer {
         img {
-            width: 300px;
-            object-fit: contain;
-            aspect-ratio: 2;
+            width: 100px;
         }
     }
 
@@ -1202,6 +1218,20 @@ input {
     }
 }
 
+.footer-name {
+    @include UTM-Charlotte;
+    font-size: 1.75rem;
+    color: $colorMain2;
+}
+
+.ul-footer {
+    @extend.ul-reset;
+    font-size: .875rem;
+
+    i {
+        color: $colorMain2;
+    }
+}
 
 .copyright {
     background: $colorMain2;
@@ -1454,9 +1484,10 @@ input {
         }
     }
 }
-@include maxWidth(1366px){
 
+@include maxWidth(1366px) {
 }
+
 @include maxWidth(1024px) {
     .header {
         left: 0;
@@ -1506,6 +1537,7 @@ input {
         width: 100%;
     }
 }
+
 @include maxWidth(768px) {
     .header {
         position: sticky !important;
@@ -1659,10 +1691,11 @@ input {
         padding: 0;
     }
 
-    .list-album{
-        padding:0;
+    .list-album {
+        padding: 0;
     }
 }
+
 @include maxWidth(468px) {
     .header-mb {
         height: 100%;
@@ -1809,7 +1842,7 @@ input {
         }
     }
 
-    .footer .footer-title{
-        font-size:16px;
+    .footer .footer-title {
+        font-size: 16px;
     }
 }

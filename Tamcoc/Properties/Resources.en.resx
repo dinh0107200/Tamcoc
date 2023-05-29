@@ -145,10 +145,10 @@
     <value>Content</value>
   </data>
   <data name="BookRoom" xml:space="preserve">
-    <value>book room</value>
+    <value>Book room</value>
   </data>
   <data name="BtnSubmit" xml:space="preserve">
-    <value>Gửi yêu cầu</value>
+    <value>Submit</value>
   </data>
   <data name="CheckIn" xml:space="preserve">
     <value>Booking date</value>
@@ -199,7 +199,7 @@
     <value>About us</value>
   </data>
   <data name="InValid" xml:space="preserve">
-    <value>{0} không đúng định dạng.</value>
+    <value>{0} is invalid.</value>
   </data>
   <data name="KeywordSearch" xml:space="preserve">
     <value>Keyword Search</value>

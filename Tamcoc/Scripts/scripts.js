@@ -10,16 +10,11 @@ $(document).ready(function () {
     });
 });
 
-
 $('.overlay').click(function () {
-    $('.hamburger').removeClass('is-active')
-    $('.header-mb').removeClass('active')
-    $('.overlay').removeClass(' active')
-})
-
-
-
-
+    $('.hamburger').removeClass('is-active');
+    $('.header-mb').removeClass('active');
+    $('.overlay').removeClass(' active');
+});
 
 function IndexJS() {
     $(window).scroll(function () {
@@ -47,7 +42,6 @@ function IndexJS() {
         infinite: true,
         autoplay: true,
         autoplaySpeed: 2000,
-        speed: 700, 
         slidesToShow: 3,
         variableWidth: true,
         responsive: [
@@ -57,7 +51,7 @@ function IndexJS() {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     infinite: true,
-                    dots: false,
+                    dots: false
                 }
             },
             {
@@ -84,7 +78,6 @@ function IndexJS() {
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 700, 
         dots: true,
         autoplaySpeed: 2000,
         prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-chevron-left' aria-hidden='true'></i></button>",
@@ -129,7 +122,6 @@ function IndexJS() {
         dots: false,
         autoplay: true,
         autoplaySpeed: 2000,
-        speed: 800,
         asNavFor: '.service-cat',
         focusOnSelect: true,
         prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-chevron-left' aria-hidden='true'></i></button>",
@@ -160,7 +152,7 @@ $('.room-nav').slick({
     dots: false,
     focusOnSelect: true,
     prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-chevron-left' aria-hidden='true'></i></button>",
-    nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-chevron-right' aria-hidden='true'></i></button>",
+    nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-chevron-right' aria-hidden='true'></i></button>"
 });
 $(".contact-form").on("submit", function (e) {
     e.preventDefault();
@@ -189,18 +181,17 @@ $('#order-form').submit(function (e) {
                 heading: "Contact successfully sent",
                 text: data.msg,
                 icon: "success"
-            })
+            });
             $("#order-form").trigger("reset");
         } else {
             $.toast({
                 heading: "Failed to send",
                 text: data.msg,
                 icon: "error"
-            })
+            });
         }
     });
 });
-
 $(".subcribe-form").on("submit", function (e) {
     e.preventDefault();
     $.post("/Home/SubcribeForm", $(this).serialize(), function (data) {
@@ -220,8 +211,6 @@ $(".subcribe-form").on("submit", function (e) {
         }
     });
 });
-
-
 
 function updateSlickDotsWidth() {
     var slideCount = $('.room-slick').slick('getSlick').slideCount;
@@ -246,22 +235,19 @@ function Hide() {
     $('.box-search').removeClass('active');
 }
 function showMb() {
-    $('.menu-mb').addClass('active')
-    $('.overlay').addClass(' active')
+    $('.menu-mb').addClass('active');
+    $('.overlay').addClass(' active');
 }
 function HidenMb() {
-    $('.menu-mb').removeClass('active')
-    $('.overlay').removeClass(' active')
+    $('.menu-mb').removeClass('active');
+    $('.overlay').removeClass(' active');
 }
-
-
 function CloseMenu() {
-    $('.menu-mb').removeClass('active')
-    $('.overlay').removeClass(' active')
+    $('.menu-mb').removeClass('active');
+    $('.overlay').removeClass(' active');
 }
 
 var backToTopDiv = $('.backtop');
-
 backToTopDiv.on('click', function (e) {
     e.preventDefault(); // Ngăn chặn hành vi mặc định khi nhấp vào phần tử
     $('html, body').animate({ scrollTop: 0 }, 'slow');
@@ -275,9 +261,8 @@ $(window).scroll(function () {
 });
 $('.play-img').click(function () {
     $.fancybox({
-        href: $(this).attr('href'),
+        href: $(this).attr('href')
         // Tùy chỉnh kích thước và giao diện Fancybox tại đây
     });
-
     return false;
 });

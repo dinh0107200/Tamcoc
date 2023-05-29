@@ -1,18 +1,14 @@
 ﻿using Helpers;
 using PagedList;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using Tamcoc.Filters;
 using Tamcoc.Models;
 using Tamcoc.ViewModel;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System;
-using Tamcoc.Filters;
-using Tamcoc.DAL;
-using System.Drawing.Printing;
-using System.Security.Policy;
 
 namespace Tamcoc.Controllers
 {
@@ -21,14 +17,13 @@ namespace Tamcoc.Controllers
         private static string Email => WebConfigurationManager.AppSettings["email"];
         private static string Password => WebConfigurationManager.AppSettings["password"];
 
-
         #region Home
         [ChildActionOnly]
         public PartialViewResult Header()
         {
             var model = new HeaderViewModel
             {
-                ArticleCategoryDtos = ArticleCategoryDtos().Where(a => a.ShowMenu && (a.TypePost == TypePost.Article || a.TypePost == TypePost.Service) ).OrderBy(a => a.CategorySort),
+                ArticleCategoryDtos = ArticleCategoryDtos().Where(a => a.ShowMenu && (a.TypePost == TypePost.Article || a.TypePost == TypePost.Service)).OrderBy(a => a.CategorySort),
                 RoomDtos = RoomDtos().Where(a => a.ShowMenu).OrderByDescending(a => a.CreateDate),
                 ConfigSiteDto = ConfigSiteDto(),
             };
@@ -173,7 +168,8 @@ namespace Tamcoc.Controllers
         [HttpGet, LanguageFilters]
         [Route("{culture:regex(^(?!.*vi).*$)}/contact-us", Order = 1)]
         [Route("{culture=vi}/lien-he", Order = 2)]
-        public ActionResult Contact() {
+        public ActionResult Contact()
+        {
 
             var model = new ContactViewModel
             {
@@ -181,7 +177,7 @@ namespace Tamcoc.Controllers
             };
             return View(model);
         }
-        [HttpPost, ValidateAntiForgeryToken , LanguageFilters]
+        [HttpPost, ValidateAntiForgeryToken, LanguageFilters]
         public JsonResult ContactForm(ContactViewModel model)
         {
             if (!ModelState.IsValid)
@@ -227,7 +223,7 @@ namespace Tamcoc.Controllers
             var kind = _unitOfWork.KindOfRoomRepository.Get();
             var model = new FormOrderViewModel
             {
-                    KindOfRooms = kind,
+                KindOfRooms = kind,
             };
             return PartialView(model);
         }
@@ -267,13 +263,13 @@ namespace Tamcoc.Controllers
         [HttpGet, LanguageFilters]
         [Route("{culture:regex(^(?!.*vi).*$)}/about", Order = 1)]
         [Route("{culture=vi}/ve-chung-toi", Order = 2)]
-        public ActionResult About() 
+        public ActionResult About()
         {
             var model = new IntroductViewModel
             {
                 ConfigSiteDto = ConfigSiteDto(),
             };
-            return View(model); 
+            return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
         public JsonResult SubcribeForm(string email)
@@ -297,19 +293,3 @@ namespace Tamcoc.Controllers
         }
     }
 }
-
-
-
-//AboutMore En savoir plus	
-//Album	galerie de photos	
-//ArticleTitle	Exemple de calendrier d'actualités	
-//Contact	Contact	
-//FeedbackTitle	Les clients parlent de nous	
-//FooterDes	Entrez votre adresse e-mail pour notre liste de diffusion afin de vous tenir au courant.	
-//FooterForm	Enregistrez-vous pour recevoir le bulletin d'informations	
-//FooterSocial	lien réseau social	
-//Home	Page d'accueil	
-//IntroductTitle	À propos de nous	
-//RoomText	Nos catégories de chambres	
-//RoomTitle	Salle de repos	
-//ServiceTitle	Nos services	

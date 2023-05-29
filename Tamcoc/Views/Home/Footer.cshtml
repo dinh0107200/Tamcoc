@@ -1,7 +1,7 @@
 ﻿@model Tamcoc.ViewModel.FooterViewModel
-    @{ 
-        var configs = Model.ConfigSiteDto;
-    }
+@{
+    var configs = Model.ConfigSiteDto;
+}
 <section class="footer shadow">
     <div class="container">
         <div class="row">
@@ -12,23 +12,34 @@
                         <img src="@Path.Combine("/images/configs/", configs.Image)" alt="@configs.Title" />
                     }
                 </div>
-                @Html.Raw(configs.InfoFooter)
+                <div class="footer-name">@configs.Title</div>
+                <ul class="ul-footer">
+                    <li><i class="fa fa-fw fa-map-marker-alt"></i> <strong>@Resources.Address</strong>: @configs.Place</li>
+                    <li><i class="fa fa-fw fa-phone-alt"></i> <strong>Hotline</strong>: @configs.Hotline</li>
+                    <li><i class="fa fa-fw fa-envelope"></i> <strong>Email</strong>: @configs.Email</li>
+                </ul>
+                @*@Html.Raw(configs.InfoFooter)*@
             </div>
-            <div class="col-lg-4 mt-lg-0 mt-4   ">
-                <div class="footer-title mb-3">
+            <div class="col-lg-4 mt-lg-0 mt-4">
+                <div class="footer-title mb-2">
                     @Resources.FooterForm
                 </div>
                 <i>@Resources.FooterDes</i>
                 <form class="subcribe-form">
                     @Html.AntiForgeryToken()
-                    <input type="email" name="email" value="" autocomplete="off" placeholder="Email Address..." />
+                    <div class="input-group">
+                        <input type="email" name="email" autocomplete="off" placeholder="Email Address..." class="form-control" required=""/>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn"><i class="fal fa-paper-plane"></i></button>
+                        </div>
+                    </div>
                 </form>
                 <div class="footer-title mt-3">
-                   @Resources.FooterSocial
+                    @Resources.FooterSocial
                 </div>
                 <ul class="share d-flex pl-0">
                     <li>
-                        <a href="@configs.Facebook" target="_blank"target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="@configs.Facebook" target="_blank" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     </li>
                     <li>
                         <a href="@configs.Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -41,13 +52,13 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-4 mt-lg-0 mt-4">
-                <div class="footer-title mb-1">
+            <div class="col-lg-4 mt-lg-0 mt-3">
+                <div class="footer-title mb-3">
                     Fanpage
                 </div>
                 @if (configs.Facebook != null)
                 {
-                    <div class="embed-responsive mt-4">
+                    <div class="embed-responsive">
                         <div class="fb-page" data-href="@configs.Facebook" data-tabs="" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                             <blockquote cite="@configs.Facebook" class="fb-xfbml-parse-ignore">
                                 <a href="@configs.Facebook">@configs.Title</a>
