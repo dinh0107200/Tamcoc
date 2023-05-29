@@ -142,21 +142,6 @@
                         <td class="form_text">@Html.CheckBoxFor(model => model.Room.Active, new { @checked = "checked" })</td>
                     </tr>
                 </table>
-                <div class="border p-2 mt-3">
-                    <div class="group-cbx list-product formListProduct">
-                        <div class="pb-1 d-flex flex-lg-column">
-                            <span class="text-uppercase font-weight-bold w-100 p-1">Chọn loại phòng</span>
-                        </div>
-                        <div class="list">
-                            @foreach (var item in Model.KindOfRooms)
-                            {
-                                <label class="" data-toggle="tooltip" title="@item.Name">
-                                    <input type="radio" value="@item.Id" name="Room.KindOfRoomsId" /> @item.Name
-                                </label>
-                            }
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

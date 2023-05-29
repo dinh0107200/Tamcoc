@@ -214,10 +214,10 @@ namespace Tamcoc.Controllers
         [Route("{culture=vi}/dat-phong", Order = 2)]
         public PartialViewResult FormOrder()
         {
-            var kind = _unitOfWork.KindOfRoomRepository.Get();
+            var kind = _unitOfWork.RoomRepository.GetQuery(a => a.Active);
             var model = new FormOrderViewModel
             {
-                KindOfRooms = kind,
+                Rooms = kind,
             };
             return PartialView(model);
         }

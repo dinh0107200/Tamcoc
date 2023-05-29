@@ -46,7 +46,8 @@ namespace Tamcoc.ViewModel
     public class FormOrderViewModel
     {
         public Order Order { get; set; }
-        public IEnumerable<KindOfRoom> KindOfRooms { get; set; }
+        //public IEnumerable<KindOfRoom> KindOfRooms { get; set; }
+        public IEnumerable<Room> Rooms { get; set; }
     }
     public class FormDetailViewModel
     {

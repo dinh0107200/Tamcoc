@@ -40,7 +40,7 @@ function IndexJS() {
         arrows: false,
         dots: true,
         infinite: true,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 2000,
         slidesToShow: 3,
         variableWidth: true,
@@ -57,8 +57,9 @@ function IndexJS() {
             {
                 breakpoint: 600,
                 settings: {
+                    variableWidth: true,
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 1
                 }
             },
             {
@@ -152,7 +153,36 @@ $('.room-nav').slick({
     dots: false,
     focusOnSelect: true,
     prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-chevron-left' aria-hidden='true'></i></button>",
-    nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-chevron-right' aria-hidden='true'></i></button>"
+    nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-chevron-right' aria-hidden='true'></i></button>",
+    responsive: [
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: false
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 425,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+    ]
+
 });
 $(".contact-form").on("submit", function (e) {
     e.preventDefault();

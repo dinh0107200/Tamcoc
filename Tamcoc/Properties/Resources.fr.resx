@@ -160,7 +160,7 @@
     <value>Contenu</value>
   </data>
   <data name="BookRoom" xml:space="preserve">
-    <value>Salle de livre</value>
+    <value>Réservation</value>
   </data>
   <data name="BtnSubmit" xml:space="preserve">
     <value>Envoyer exiger</value>
