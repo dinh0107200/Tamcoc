@@ -37,14 +37,23 @@
         </tr>
         <tr>
             <td class="form_name">@Html.LabelFor(model => model.Banner.Video)</td>
-            <td class="form_text">@Html.TextBoxFor(model => model.Banner.Video, new { type = "file" }) <span class="red-warring">Chấp nhận mp4</span></td>
+            <td class="form_text">
+                @Html.TextBoxFor(model => model.Banner.Video, new { type = "file" }) <span class="red-warring">Chấp nhận mp4 và dung lượng < 100MB</span><br/>
+                
+                @if (Model.Banner.Video != null)
+                {
+                    <video autoplay muted loop width="400">
+                        <source src="@Path.Combine("/images/banners/", Model.Banner.Video)" type="video/mp4">
+                    </video>
+                }
+            </td>
         </tr>
         <tr>
             <td class="form_name">@Html.LabelFor(model => model.Banner.ListImage)</td>
             <td class="form_text">
                 <div class="alert alert-info">
                     <p class="btn btn-success fileinput-button">
-                        <i class="glyphicon glyphicon-plus"></i>
+                        <i class="fa fa-plus"></i>
                         <span>Chọn ảnh...</span>
                         <input type="file" id="fileupload" name="files[]" accept="image/*" multiple="" />
                     </p><br />

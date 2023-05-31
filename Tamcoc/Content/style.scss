@@ -74,9 +74,6 @@ $colorblur: #9B9B9B;
     }
 }
 
-
-
-
 @mixin before($width, $height) {
     content: '';
     position: absolute;
@@ -105,12 +102,6 @@ $colorblur: #9B9B9B;
     left: 50%;
     transform: translateX(-50%);
 }
-
-/** {
-    margin: 0;
-    margin: 0;
-    box-sizing: border-box;
-}*/
 
 html {
     scroll-behavior: smooth;
@@ -301,9 +292,6 @@ input {
                 }
             }
         }
-
-
-
         a {
             color: $white;
         }
@@ -418,7 +406,6 @@ input {
         }
     }
 }
-
 
 .banner {
     .banner-video {

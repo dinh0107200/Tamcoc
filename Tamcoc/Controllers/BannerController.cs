@@ -1,12 +1,9 @@
 ﻿using Helpers;
+using PagedList;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using System.Drawing;
 using Tamcoc.DAL;
 using Tamcoc.Models;
 using Tamcoc.ViewModel;
@@ -49,7 +46,7 @@ namespace Tamcoc.Controllers
             if (ModelState.IsValid)
             {
                 var isPost = true;
-               
+
                 var video = Request.Files["Banner.Video"];
                 model.Banner.ListImage = fc["Pictures"];
                 if (video != null && video.ContentLength > 0)
@@ -61,9 +58,9 @@ namespace Tamcoc.Controllers
                     }
                     else
                     {
-                        if (video.ContentLength > 4000 * 1024)
+                        if (video.ContentLength > 100 * 1024 * 1024)
                         {
-                            ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
+                            ModelState.AddModelError("", @"Dung lượng lớn hơn 100MB. Hãy thử lại");
                             isPost = false;
                         }
                         else
@@ -117,9 +114,9 @@ namespace Tamcoc.Controllers
                     }
                     else
                     {
-                        if (video.ContentLength > 4000 * 1024)
+                        if (video.ContentLength > 100 * 1024 * 1024)
                         {
-                            ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
+                            ModelState.AddModelError("", @"Dung lượng lớn hơn 100MB. Hãy thử lại");
                             isPost = false;
                         }
                         else
@@ -127,7 +124,7 @@ namespace Tamcoc.Controllers
                             var imgPath = "/images/banners/" + DateTime.Now.ToString("yyyy/MM/dd");
                             HtmlHelpers.CreateFolder(Server.MapPath(imgPath));
                             var imgFileName = DateTime.Now.ToFileTimeUtc() + Path.GetExtension(video.FileName);
-                            model.Banner.Video = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
+                            banner.Video = DateTime.Now.ToString("yyyy/MM/dd") + "/" + imgFileName;
                             video.SaveAs(Server.MapPath(Path.Combine(imgPath, imgFileName)));
                         }
                     }
@@ -143,7 +140,6 @@ namespace Tamcoc.Controllers
                     banner.Url = model.Banner.Url;
                     banner.Home = model.Banner.Home;
                     banner.Content = model.Banner.Content;
-                    _unitOfWork.BannerRepository.Update(banner);
                     _unitOfWork.Save();
 
                     return RedirectToAction("ListBanner", new { result = "update" });
@@ -226,7 +222,7 @@ namespace Tamcoc.Controllers
                 {
                     BannerId = bannerId,
                     ListImage = listImg,
-                    GroupId  = groupId,
+                    GroupId = groupId,
                     Video = Video,
                     LanguageId = langId,
                     BannerName = name,
@@ -318,6 +314,7 @@ namespace Tamcoc.Controllers
             return RedirectToAction("UpdateBannerFr", new { bannerId, result = 1 });
         }
         #endregion
+
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();
