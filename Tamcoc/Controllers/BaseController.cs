@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Tamcoc.DAL;
 using Tamcoc.Models;
@@ -269,7 +267,7 @@ namespace Tamcoc.Controllers
             switch (CultureInfo.CurrentCulture.Name)
             {
                 case "en":
-                    feedbackDtos = _unitOfWork.FeedbackEnRepository.GetQuery(a => a.Feedback.Active && a.LanguageId == 2 , p => p.OrderBy(a => a.Feedback.Sort)).Select(a => new FeedbackDto
+                    feedbackDtos = _unitOfWork.FeedbackEnRepository.GetQuery(a => a.Feedback.Active && a.LanguageId == 2, p => p.OrderBy(a => a.Feedback.Sort)).Select(a => new FeedbackDto
                     {
                         Id = a.FeedbackId,
                         Name = a.Name,

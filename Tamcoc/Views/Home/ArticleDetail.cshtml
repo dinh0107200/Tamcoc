@@ -61,11 +61,11 @@
                 <div class="article-detail-title">
                     @Model.ArticleDto.Subject
                 </div>
-                <div class="detail-date">
+                <p class="detail-date">
                     @Model.ArticleDto.CreateDate.ToString("dd/MM/yyyy")
                     @Model.ArticleDto.CreateDate.ToString("HH:mm")
                     <a href="@Url.Action("ArticleCategory", new {url = Model.ArticleDto.Url , Culture})">@Model.ArticleDto.CategoryName</a>
-                </div>
+                </p>
                 <div class="detail-content">
                     @Html.Raw(Model.ArticleDto.Body)
                 </div>

@@ -44,7 +44,6 @@ namespace Tamcoc.Controllers
         public ActionResult Index()
         {
             var album = BannerDtos().Where(a => a.GroupId == 2);
-            var count = album.Count();
             var model = new HomeViewModel
             {
                 BannerDtos = BannerDtos().Where(a => a.GroupId == 2),
@@ -121,13 +120,12 @@ namespace Tamcoc.Controllers
         [Route("{culture=vi}/blog/{url}", Order = 2)]
         public ActionResult ArticleCategory(int? page, string url)
         {
-            var category = ArticleCategoryDtos().FirstOrDefault(a => a.CategoryActive && a.Url == url);
+            var category = ArticleCategoryDtos().FirstOrDefault(a => a.Url == url);
             if (category == null)
             {
                 return RedirectToAction("Index");
             }
-            var articles = ArticleDtos().Where(
-                a => a.Active && (a.ArticleCategoryId == category.Id || a.ParentId == category.Id)).OrderByDescending(a => a.CreateDate);
+            var articles = ArticleDtos().Where(a => a.ArticleCategoryId == category.Id || a.ParentId == category.Id).OrderByDescending(a => a.CreateDate);
             var pageNumber = page ?? 1;
 
             if (articles.Count() == 1)
@@ -223,7 +221,7 @@ namespace Tamcoc.Controllers
         }
         public PartialViewResult FormOderDetail(int id)
         {
-            var room = RoomDtos().Where(a => a.Id == id).FirstOrDefault();
+            var room = RoomDtos().FirstOrDefault(a => a.Id == id);
             var model = new FormDetailViewModel
             {
                 RoomDto = room,

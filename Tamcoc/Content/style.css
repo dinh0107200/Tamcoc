@@ -1297,7 +1297,7 @@ input {
     width: 50%;
     height: 100vh;
     z-index: 9;
-    background: #9FC03A;
+    background: #1D421D;
     transition: all 1s;
     overflow-y: auto;
   }
@@ -1327,7 +1327,7 @@ input {
   }
   .menu-mb .ul-mb .li-mb ul {
     padding-left: 0;
-    background: rgba(121, 145, 173, 0.4392156863);
+    background: #9FC03A;
   }
   .menu-mb .ul-mb .li-mb ul li {
     border-top: 1px solid rgba(121, 145, 173, 0.4392156863);

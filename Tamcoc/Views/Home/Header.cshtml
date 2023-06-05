@@ -6,13 +6,13 @@
     <div class="header-top">
         <div class="">
             @*<div class="logo bg-white">
-                <a href="/">
-                    @if (config.Image != null)
-                    {
-                        <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif"  alt="@config.Title" class="lazyload" />
-                    }
-                </a>
-            </div>*@
+                    <a href="/">
+                        @if (config.Image != null)
+                        {
+                            <img data-src="@Path.Combine("/images/configs/", config.Image)" src="~/Content/images/img-main/base64.gif"  alt="@config.Title" class="lazyload" />
+                        }
+                    </a>
+                </div>*@
         </div>
         <div class="d-flex align-items-center justify-content-between py-2">
             <div class="header-top__item">
@@ -46,59 +46,55 @@
                         </div>
                         break;
                 }
+                <div class="collapse position-absolute box-lang-icon bg-white shadow" id="collapseExample">
+                    @switch (Culture)
+                    {
+                        case "en":
+                            <div class="box-lang mb-2">
+                                <a href="@Url.Action("Index",new {Culture = "vi"})">
+                                    <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
+                                    @Resources.VietNam
+                                </a>
+                            </div>
+                            <div class="box-lang">
+                                <a href="@Url.Action("Index",new {Culture = "fr"})">
+                                    <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
+                                    @Resources.French
+                                </a>
+                            </div>
+                            break;
+                        case "fr":
+                            <div class="box-lang mb-2">
+                                <a href="@Url.Action("Index",new {Culture = "vi"})">
+                                    <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
+                                    @Resources.VietNam
+                                </a>
+                            </div>
+                            <div class="box-lang">
+                                <a href="@Url.Action("Index",new {Culture = "en"})">
+                                    <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
+                                    @Resources.English
+                                </a>
+                            </div>
+                            break;
+                        default:
+                            <div class="box-lang mb-2">
+                                <a href="@Url.Action("Index",new {Culture = "en"})">
+                                    <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
+                                    @Resources.English
+                                </a>
+                            </div>
+                            <div class="box-lang">
+                                <a href="@Url.Action("Index",new {Culture = "fr"})">
+                                    <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
+                                    @Resources.French
+                                </a>
+                            </div>
+                            break;
+                    }
 
 
-
-
-            <div class="collapse position-absolute box-lang-icon bg-white shadow" id="collapseExample">
-                @switch (Culture)
-                {
-                    case "en":
-                        <div class="box-lang mb-2">
-                            <a href="@Url.Action("Index",new {Culture = "vn"})">
-                                <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
-                                @Resources.VietNam
-                            </a>
-                        </div>
-                        <div class="box-lang">
-                            <a href="@Url.Action("Index",new {Culture = "fr"})">
-                                <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
-                                @Resources.French
-                            </a>
-                        </div>
-                        break;
-                    case "fr":
-                        <div class="box-lang mb-2">
-                            <a href="@Url.Action("Index",new {Culture = "vn"})">
-                                <img src="~/Content/images/img-main/vietnam 1.png" class="img-lang" alt="tiếng việt" />
-                                @Resources.VietNam
-                            </a>
-                        </div>
-                        <div class="box-lang">
-                            <a href="@Url.Action("Index",new {Culture = "en"})">
-                                <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
-                                @Resources.English
-                            </a>
-                        </div>
-                        break;
-                    default:
-                        <div class="box-lang mb-2">
-                            <a href="@Url.Action("Index",new {Culture = "en"})">
-                                <img src="~/Content/images/img-main/Flag_of_the_United_Kingdom_(1-2).svg.png" class="img-lang" alt="tiếng anh" />
-                                @Resources.English
-                            </a>
-                        </div>
-                        <div class="box-lang">
-                            <a href="@Url.Action("Index",new {Culture = "fr"})">
-                                <img src="~/Content/images/img-main/Flag_of_France_(1794–1815,_1830–1974,_2020–present).svg.png" class="img-lang" alt="tiếng pháp" />
-                                @Resources.French
-                            </a>
-                        </div>
-                        break;
-                }
-
-
-            </div>
+                </div>
             </div>
             <div class="header-top__item " onclick="Show()">
                 <i class="far fa-search pr-2"></i>@Resources.Search
@@ -141,17 +137,17 @@
                             <a href="@Url.Action("ArticleCategory", new {url = item.Url, Culture})">@item.CategoryName</a>
                             @if (Model.ArticleCategoryDtos.Any(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
                             {
-                            <div class="drop">
-                                <ul class="sub-menu ul-reset ">
-                                    @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
-                                    {
-                                        <li><a href="@Url.Action("ArticleCategory", new {url = child.Url , Culture})">@child.CategoryName</a></li>
-                                    }
-                                </ul>
-                            </div>
+                                <div class="drop">
+                                    <ul class="sub-menu ul-reset ">
+                                        @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
+                                        {
+                                            <li><a href="@Url.Action("ArticleCategory", new {url = child.Url , Culture})">@child.CategoryName</a></li>
+                                        }
+                                    </ul>
+                                </div>
                             }
                         </li>
-                        
+
                     }
                     <li><a href="@Url.Action("Album", new {Culture})">@Resources.Library</a></li>
                     <li><a href="@Url.Action("Contact", new {Culture})">@Resources.Contact</a></li>
@@ -237,10 +233,10 @@
                     <ul class="ul-reset ">
                         @foreach (var item in Model.RoomDtos.Where(a => !string.IsNullOrEmpty(a.Url)))
                         {
-                            <li class="p-2"><a class="mx-5" href="@Url.Action("RoomDetail", new {url = item.Url , Culture})">@item.Name</a></li>
+                            <li class="p-2"><a class="mx-3" href="@Url.Action("RoomDetail", new {url = item.Url , Culture})">@item.Name</a></li>
                         }
                     </ul>
-                }
+                }ơ
             </li>
             @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ParentId == null && !string.IsNullOrEmpty(a.Url)))
             {
@@ -257,7 +253,7 @@
                         <ul class="ul-reset ">
                             @foreach (var child in Model.ArticleCategoryDtos.Where(a => a.ParentId == item.Id && !string.IsNullOrEmpty(a.Url)))
                             {
-                                <li class="p-2"><a class="mx-5" href="@Url.Action("ArticleCategory", new {url = child.Url , Culture})">@child.CategoryName</a></li>
+                                <li class="p-2"><a class="mx-3" href="@Url.Action("ArticleCategory", new {url = child.Url , Culture})">@child.CategoryName</a></li>
                             }
                         </ul>
                     }
