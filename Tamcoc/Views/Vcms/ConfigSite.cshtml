@@ -51,6 +51,17 @@
         </tr>
     }
     <tr>
+        <td class="form_name">@Html.LabelFor(model => model.SubHeaderImage)</td>
+        <td class="form_text">@Html.TextBoxFor(model => model.SubHeaderImage, new { type = "file" }) <span class="red-warring">Kích thươc: 1900px - auto</span></td>
+    </tr>
+    @if (Model.SubHeaderImage != null)
+    {
+        <tr>
+            <td class="form_name"></td>
+            <td class="form_text"><img class="img-border" src="@Path.Combine("/images/configs/", Model.SubHeaderImage)?w=150" /></td>
+        </tr>
+    }
+    <tr>
         <td class="form_name">@Html.LabelFor(model => model.AboutImage)</td>
         <td class="form_text">@Html.TextBoxFor(model => model.AboutImage, new { type = "file" }) <span class="red-warring">Kích thươc: 470px - 600px</span></td>
     </tr>

@@ -1,8 +1,10 @@
-﻿@model Tamcoc.ViewModel.RoomDetialViewModel
+﻿@using Tamcoc.Models
+@model Tamcoc.ViewModel.RoomDetialViewModel
 @{
     ViewBag.Title = Model.RoomDto.TitleMeta ?? Model.RoomDto.Name;
     ViewBag.Description = Model.RoomDto.DescriptionMeta ?? Model.RoomDto.Description;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("RoomDetail", new { Model.RoomDto.Url, Culture });
+    var config = (ConfigSiteDto)HttpContext.Current.Application["ConfigSite"];
 
     if (Model.RoomDto.ListImage != null)
     {
@@ -13,7 +15,7 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page">
+<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
     <div class="name-page">
         @Model.RoomDto.Name
     </div>

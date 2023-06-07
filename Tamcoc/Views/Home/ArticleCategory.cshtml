@@ -1,9 +1,11 @@
 ﻿@model Tamcoc.ViewModel.ArticleCategoryViewModel
 @using PagedList.Mvc
+@using Tamcoc.Models
 @{
     ViewBag.Title = Model.CategoryDto.TitleMeta ?? Model.CategoryDto.CategoryName;
     ViewBag.Description = Model.CategoryDto.DescriptionMeta ?? Model.CategoryDto.Description;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("ArticleCategory", "Home", new { url = Model.CategoryDto.Url, Culture });
+    var config = (ConfigSiteDto)HttpContext.Current.Application["ConfigSite"];
 
     var fa = Model.ArticleDtos.FirstOrDefault();
     if (fa?.Image != null)
@@ -15,7 +17,7 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page">
+<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
     <div class="name-page">
         @Model.CategoryDto.CategoryName
     </div>
@@ -46,11 +48,11 @@
                             <a href="@Url.Action("ArticleDetail", new { url = item.Url, Culture })">
                                 @if (item.Image != null)
                                 {
-                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject" class="lazyload"/>
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject" class="lazyload" />
                                 }
                                 else
                                 {
-                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Subject" class="lazyload"/>
+                                    <img src="~/Content/images/img-main/on-image.jpg" alt="@item.Subject" class="lazyload" />
                                 }
                             </a>
                         </div>

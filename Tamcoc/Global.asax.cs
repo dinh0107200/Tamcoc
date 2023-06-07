@@ -1,11 +1,11 @@
-﻿using Tamcoc.DAL;
-using Tamcoc.Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Tamcoc.DAL;
 using Tamcoc.Migrations;
+using Tamcoc.Models;
 
 namespace Tamcoc
 {
@@ -46,8 +46,8 @@ namespace Tamcoc
                     AboutUrl = a.AboutUrl,
                     Youtube = a.Youtube,
                     Favicon = a.Favicon,
+                    SubHeaderImage = a.SubHeaderImage
                 }).FirstOrDefault();
-
                 Application["ConfigSiteEn"] = unitofWork.ConfigSiteEnRepository.GetQuery(a => a.LanguageId == 2).Select(a => new ConfigSiteDto
                 {
                     Title = a.Title,
@@ -69,6 +69,7 @@ namespace Tamcoc
                     Favicon = a.ConfigSite.Favicon,
                     AboutText = a.AboutText,
                     Youtube = a.ConfigSite.Youtube,
+                    SubHeaderImage = a.ConfigSite.SubHeaderImage
                 }).FirstOrDefault();
                 Application["ConfigSiteFr"] = unitofWork.ConfigSiteFrRepository.GetQuery(a => a.LanguageId == 3).Select(a => new ConfigSiteDto
                 {
@@ -92,6 +93,7 @@ namespace Tamcoc
                     Favicon = a.ConfigSite.Favicon,
                     AboutText = a.AboutText,
                     Youtube = a.ConfigSite.Youtube,
+                    SubHeaderImage = a.ConfigSite.SubHeaderImage
                 }).FirstOrDefault();
             }
         }

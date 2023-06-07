@@ -1,14 +1,15 @@
-﻿@model Tamcoc.ViewModel.AlbumViewModel
+﻿@using Tamcoc.Models
+@model Tamcoc.ViewModel.AlbumViewModel
 @{
-    var config = Model.ConfigSiteDto;
     ViewBag.Title = Resources.Contact;
     ViewBag.Description = Resources.Contact;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Album", new { Culture });
+    var config = (ConfigSiteDto)HttpContext.Current.Application["ConfigSite"];
 }
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page">
+<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
     <div class="name-page">
         @Resources.Album
     </div>

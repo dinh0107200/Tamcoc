@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Tamcoc.Models
 {
@@ -12,9 +10,8 @@ namespace Tamcoc.Models
         [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Facebook"),
          Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Facebook { get; set; }
-
         [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Youtube"),
-        Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
+         Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string Youtube { get; set; }
         [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Twitter"),
         Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
@@ -56,7 +53,11 @@ namespace Tamcoc.Models
         public string InfoContact { get; set; }
         [Display(Name = "Thông tin chân trang"), UIHint("EditorBox")]
         public string InfoFooter { get; set; }
-        public virtual ICollection<ConfigSiteEn> ConfigSiteEns { get; set; }
+        [StringLength(500), Display(Name = "Ảnh bìa nhỏ trang phụ")]
+        public string SubHeaderImage { get; set; }
+
+        public virtual ICollection<ConfigSiteEn> ConfigSiteEns
+        { get; set; }
         public virtual ICollection<ConfigSiteFr> ConfigSiteFrs { get; set; }
     }
 
@@ -67,13 +68,12 @@ namespace Tamcoc.Models
         [Key, Column(Order = 2)]
         public int LanguageId { get; set; }
         [Display(Name = "Địa chỉ"), UIHint("TextBox")]
-        public string Place { get; set; }   
+        public string Place { get; set; }
         [Display(Name = "Thẻ title"), StringLength(200, ErrorMessage = "Tối đa 200 ký tự"), UIHint("TextBox")]
         public string Title { get; set; }
         [Display(Name = "Thẻ description"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]
         public string Description { get; set; }
-        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn bài giới thiệu"),
-Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
+        [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn bài giới thiệu"), Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string AboutUrl { get; set; }
         [Display(Name = "Thông tin bài giới thiệu"), UIHint("EditorBox")]
         public string AboutText { get; set; }
@@ -137,5 +137,6 @@ Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string InfoContact { get; set; }
         public string InfoFooter { get; set; }
         public string TaxCode { get; set; }
+        public string SubHeaderImage { get; set; }
     }
 }

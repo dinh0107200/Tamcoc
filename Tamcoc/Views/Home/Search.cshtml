@@ -1,14 +1,16 @@
 ﻿@model Tamcoc.ViewModel.SearchViewModel
 @using PagedList.Mvc
+@using Tamcoc.Models
 @{
     ViewBag.Title = Resources.Search;
     ViewBag.Canonical = Request.Url?.GetLeftPart(UriPartial.Authority) + Url.Action("Search", Culture);
     ViewBag.Robots = "noindex";
+    var config = (ConfigSiteDto)HttpContext.Current.Application["ConfigSite"];
 }
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page">
+<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
     <div class="name-page">
         @Model.Keywords
     </div>

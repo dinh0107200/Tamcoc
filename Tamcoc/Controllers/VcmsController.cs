@@ -1,11 +1,11 @@
 ﻿using Helpers;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Drawing;
 using Tamcoc.DAL;
 using Tamcoc.Models;
 using Tamcoc.ViewModel;
@@ -239,6 +239,10 @@ namespace Tamcoc.Controllers
                     else if (Request.Files.Keys[i] == "Favicon")
                     {
                         config.Favicon = imgFile;
+                    }
+                    else if (Request.Files.Keys[i] == "SubHeaderImage")
+                    {
+                        config.SubHeaderImage = imgFile;
                     }
                 }
 
