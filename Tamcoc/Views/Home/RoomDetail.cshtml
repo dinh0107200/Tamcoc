@@ -15,11 +15,15 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
-    <div class="name-page">
-        @Model.RoomDto.Name
+@if (config.SubHeaderImage != null)
+{
+    string backgroundImageUrl = Path.Combine("/images/configs/", config.SubHeaderImage);
+    <div class="banner-page" style="background:url('@backgroundImageUrl') ; background-size:cover; background-repeat:no-repeat; background-position:center;">
+        <div class="name-page">
+            @Resources.Album
+        </div>
     </div>
-</div>
+}
 <nav aria-label="breadcrumb" class="bg-light">
     <div class="container">
         <ol class="breadcrumb bg-light">
@@ -47,7 +51,7 @@
                                 </div>
                             }
                         </div>
-                        
+
                         <div class="room-nav">
                             @foreach (var item in arr)
                             {

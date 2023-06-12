@@ -304,7 +304,7 @@ namespace Tamcoc.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tiếng anh.
+        ///   Looks up a localized string similar to Tiếng Anh.
         /// </summary>
         public static string English {
             get {
@@ -349,7 +349,7 @@ namespace Tamcoc.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tiếng pháp.
+        ///   Looks up a localized string similar to Tiếng Pháp.
         /// </summary>
         public static string French {
             get {
@@ -583,7 +583,7 @@ namespace Tamcoc.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tiếng việt.
+        ///   Looks up a localized string similar to Tiếng Việt.
         /// </summary>
         public static string VietNam {
             get {

@@ -199,7 +199,7 @@
     <value>Địa chỉ Email</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>Tiếng anh</value>
+    <value>Tiếng Anh</value>
   </data>
   <data name="FeedbackTitle" xml:space="preserve">
     <value>Khách hàng nói về chúng tôi</value>
@@ -214,7 +214,7 @@
     <value>Liên kết mạng xã hội</value>
   </data>
   <data name="French" xml:space="preserve">
-    <value>Tiếng pháp</value>
+    <value>Tiếng Pháp</value>
   </data>
   <data name="FullName" xml:space="preserve">
     <value>Họ và tên</value>
@@ -292,7 +292,7 @@
     <value>Tiện ích</value>
   </data>
   <data name="VietNam" xml:space="preserve">
-    <value>Tiếng việt</value>
+    <value>Tiếng Việt</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>Hướng nhìn</value>

@@ -8,11 +8,15 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
-    <div class="name-page">
-       @Resources.Contact
+@if (config.SubHeaderImage != null)
+{
+    string backgroundImageUrl = Path.Combine("/images/configs/", config.SubHeaderImage);
+    <div class="banner-page" style="background:url('@backgroundImageUrl') ; background-size:cover; background-repeat:no-repeat; background-position:center;">
+        <div class="name-page">
+            @Resources.Album
+        </div>
     </div>
-</div>
+}
 <nav aria-label="breadcrumb" class="bg-light">
     <div class="container">
         <ol class="breadcrumb bg-light">
@@ -62,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Contact_Body">@Resources.Body</label>
-                        @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Body , @class = "form-control",})
+                        @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Body, @class = "form-control", })
                         @Html.ValidationMessageFor(model => model.Contact.Body)
                     </div>
                     <div class="form-group text-center">

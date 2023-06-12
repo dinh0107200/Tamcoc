@@ -14,11 +14,15 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
-    <div class="name-page">
-       @Resources.Article
+@if (config.SubHeaderImage != null)
+{
+    string backgroundImageUrl = Path.Combine("/images/configs/", config.SubHeaderImage);
+    <div class="banner-page" style="background:url('@backgroundImageUrl') ; background-size:cover; background-repeat:no-repeat; background-position:center;">
+        <div class="name-page">
+            @Resources.Album
+        </div>
     </div>
-</div>
+}
 <nav aria-label="breadcrumb" class="bg-light">
     <div class="container">
         <ol class="breadcrumb bg-light">
@@ -41,7 +45,7 @@
                             <a href="@Url.Action("ArticleDetail" ,new {url = item.Url , Culture})">
                                 @if (item.Image != null)
                                 {
-                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject"  class="lazyload"/>
+                                    <img src="~/Content/images/img-main/base64.gif" data-src="@Path.Combine("/images/articles/", item.Image)" alt="@item.Subject" class="lazyload" />
                                 }
                                 else
                                 {
@@ -54,7 +58,7 @@
                             <div class="new-article__date mt-3">
                                 @item.CreateDate.ToString("dd/MM/yyyy")
                             </div>
-                            
+
                         </div>
                     </div>
                 }
