@@ -9,8 +9,8 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
-    <div class="name-page">
+<div class="banner-page" style="background:url(@Path.Combine("/images/configs/", config.SubHeaderImage)">
+    <div class="name-page" >
         @Resources.Album
     </div>
 </div>

@@ -3,6 +3,7 @@ using PagedList;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using Tamcoc.DAL;
 using Tamcoc.Models;
@@ -187,7 +188,6 @@ namespace Tamcoc.Controllers
             var langId = Convert.ToInt32(fc["LangId"]);
             var groupId = Convert.ToInt32(fc["GroupId"]);
             var name = fc["Name"];
-            var listImg = fc["ListImg"];
             var slogan = fc["Slogan"];
             var content = fc["Content"];
             var url = fc["Url"];
@@ -202,7 +202,7 @@ namespace Tamcoc.Controllers
                 }
                 else
                 {
-                    if (video.ContentLength > 4000 * 1024)
+                    if (video.ContentLength > 100 * 1024 * 1024)
                     {
                         ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
                     }
@@ -221,7 +221,7 @@ namespace Tamcoc.Controllers
                 _unitOfWork.BannerEnRepository.Insert(new BannerEn
                 {
                     BannerId = bannerId,
-                    ListImage = listImg,
+                    ListImage = fc["Pictures"] == "" ? null : fc["Pictures"],
                     GroupId = groupId,
                     Video = Video,
                     LanguageId = langId,
@@ -233,10 +233,10 @@ namespace Tamcoc.Controllers
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateBannerEn", new { bannerId, result = 1 });
             }
+            albumLang.ListImage = fc["Pictures"] == "" ? null : fc["Pictures"];
             albumLang.BannerName = name;
             albumLang.Slogan = slogan;
             albumLang.Video = Video;
-            albumLang.ListImage = listImg;
             albumLang.GroupId = groupId;
             albumLang.Url = url;
             albumLang.Content = content;
@@ -256,7 +256,6 @@ namespace Tamcoc.Controllers
             var langId = Convert.ToInt32(fc["LangId"]);
             var groupId = Convert.ToInt32(fc["GroupId"]);
             var name = fc["Name"];
-            var listimg = fc["ListImg"];
             var slogan = fc["Slogan"];
             var content = fc["Content"];
             var url = fc["Url"];
@@ -272,7 +271,7 @@ namespace Tamcoc.Controllers
                 }
                 else
                 {
-                    if (video.ContentLength > 4000 * 1024)
+                    if (video.ContentLength > 100 * 1024 * 1024)
                     {
                         ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
                     }
@@ -292,7 +291,7 @@ namespace Tamcoc.Controllers
                 {
                     BannerId = bannerId,
                     Video = Video,
-                    ListImage = listimg,
+                    ListImage = fc["Pictures"] == "" ? null : fc["Pictures"],
                     GroupId = groupId,
                     LanguageId = langId,
                     BannerName = name,
@@ -305,7 +304,7 @@ namespace Tamcoc.Controllers
             }
             albumLang.BannerName = name;
             albumLang.Slogan = slogan;
-            albumLang.ListImage = listimg;
+            albumLang.ListImage = fc["Pictures"] == "" ? null : fc["Pictures"];
             albumLang.Video = Video;
             albumLang.GroupId = groupId;
             albumLang.Url = url;
