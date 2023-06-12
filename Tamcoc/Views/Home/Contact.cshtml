@@ -8,9 +8,9 @@
 <div class="header active position-sticky top bg-white">
     @Html.Action("Header", "Home")
 </div>
-<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + config.SubHeaderImage + "')\"") }>
+<div class="banner-page" @if (config.SubHeaderImage != null) { @Html.Raw("style=\"background-image: url('" + Path.Combine("/images/configs/", config.SubHeaderImage) + "')\"") }>
     <div class="name-page">
-       @Resources.Contact
+        @Resources.Contact
     </div>
 </div>
 <nav aria-label="breadcrumb" class="bg-light">
@@ -47,22 +47,22 @@
                     @Html.AntiForgeryToken()
                     <div class="form-group">
                         <label for="Contact_FullName">@Resources.FullName</label>
-                        @Html.TextBoxFor(model => model.Contact.FullName, new { @class = "form-control", @required = "required", @placeholder = Resources.FullName })
+                        @Html.TextBoxFor(model => model.Contact.FullName, new { @class = "form-control", required = "required", placeholder = Resources.FullName })
                         @Html.ValidationMessageFor(model => model.Contact.FullName)
                     </div>
                     <div class="form-group">
                         <label for="Contact_Mobile">@Resources.NumberPhone</label>
-                        @Html.TextBoxFor(model => model.Contact.Mobile, new { @class = "form-control", @required = "required", @placeholder = Resources.NumberPhone })
+                        @Html.TextBoxFor(model => model.Contact.Mobile, new { @class = "form-control", required = "required", placeholder = Resources.NumberPhone })
                         @Html.ValidationMessageFor(model => model.Contact.Mobile)
                     </div>
                     <div class="form-group">
                         <label for="Contact_Email">@Resources.Email</label>
-                        @Html.TextBoxFor(model => model.Contact.Email, new { @class = "form-control", @placeholder = Resources.Email })
+                        @Html.TextBoxFor(model => model.Contact.Email, new { @class = "form-control", placeholder = Resources.Email })
                         @Html.ValidationMessageFor(model => model.Contact.Email)
                     </div>
                     <div class="form-group">
                         <label for="Contact_Body">@Resources.Body</label>
-                        @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, @placeholder = Resources.Body , @class = "form-control",})
+                        @Html.TextAreaFor(model => model.Contact.Body, new { rows = 3, placeholder = Resources.Body , @class = "form-control",})
                         @Html.ValidationMessageFor(model => model.Contact.Body)
                     </div>
                     <div class="form-group text-center">

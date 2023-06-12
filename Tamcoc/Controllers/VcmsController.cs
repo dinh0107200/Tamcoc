@@ -287,6 +287,7 @@ namespace Tamcoc.Controllers
                     AboutImage = config.AboutImage,
                     Youtube = config.Youtube,
                     Favicon = config.Favicon,
+                    SubHeaderImage = config.SubHeaderImage
                 };
                 return RedirectToAction("ConfigSite", "Vcms", new { result = "success" });
             }
@@ -311,6 +312,7 @@ namespace Tamcoc.Controllers
             var aboutUrl = fc["AboutUrl"];
             var feedback = fc["Feedback"];
             var aboutText = fc["AboutText"];
+            var address = fc["Place"];
             var configSiteLang = _unitOfWork.ConfigSiteEnRepository.GetQuery(a => a.ConfigSiteId == configSiteId && a.LanguageId == langId).SingleOrDefault();
             if (configSiteLang == null)
             {
@@ -324,7 +326,8 @@ namespace Tamcoc.Controllers
                     InfoFooter = infoFooter,
                     AboutFeedback = feedback,
                     InfoContact = infoContact,
-                    AboutText = aboutText
+                    AboutText = aboutText,
+                    Place = address
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateConfigSiteEn", new { configSiteId, result = 1 });
@@ -337,6 +340,7 @@ namespace Tamcoc.Controllers
             configSiteLang.InfoFooter = infoFooter;
             configSiteLang.InfoContact = infoContact;
             configSiteLang.AboutText = aboutText;
+            configSiteLang.Place = address;
 
             _unitOfWork.Save();
             HttpContext.Application["ConfigSiteEn"] = new ConfigSiteDto
@@ -360,7 +364,8 @@ namespace Tamcoc.Controllers
                 AboutText = configSiteLang.AboutText,
                 Favicon = configSiteLang.ConfigSite.Favicon,
                 AboutImage = configSiteLang.ConfigSite.AboutImage,
-                InfoContact = configSiteLang.InfoContact
+                InfoContact = configSiteLang.InfoContact,
+                SubHeaderImage = configSiteLang.ConfigSite.SubHeaderImage
             };
             return RedirectToAction("UpdateConfigSiteEn", new { configSiteId, result = 1 });
         }
@@ -382,6 +387,7 @@ namespace Tamcoc.Controllers
             var infoContact = fc["InfoContact"];
             var feedback = fc["Feedback"];
             var aboutText = fc["AboutText"];
+            var address = fc["place"];
             var configSiteLang = _unitOfWork.ConfigSiteFrRepository.GetQuery(a => a.ConfigSiteId == configSiteId && a.LanguageId == langId).SingleOrDefault();
             if (configSiteLang == null)
             {
@@ -395,7 +401,8 @@ namespace Tamcoc.Controllers
                     InfoFooter = infoFooter,
                     AboutFeedback = feedback,
                     InfoContact = infoContact,
-                    AboutText = aboutText
+                    AboutText = aboutText,
+                    Place = address
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateConfigSiteFr", new { configSiteId, result = 1 });
@@ -408,6 +415,7 @@ namespace Tamcoc.Controllers
             configSiteLang.InfoFooter = infoFooter;
             configSiteLang.InfoContact = infoContact;
             configSiteLang.AboutText = aboutText;
+            configSiteLang.Place = address;
 
             _unitOfWork.Save();
             HttpContext.Application["ConfigSiteFr"] = new ConfigSiteDto
@@ -431,7 +439,8 @@ namespace Tamcoc.Controllers
                 AboutText = configSiteLang.AboutText,
                 Favicon = configSiteLang.ConfigSite.Favicon,
                 AboutImage = configSiteLang.ConfigSite.AboutImage,
-                InfoContact = configSiteLang.InfoContact
+                InfoContact = configSiteLang.InfoContact,
+                SubHeaderImage = configSiteLang.ConfigSite.SubHeaderImage
             };
             return RedirectToAction("UpdateConfigSiteFr", new { configSiteId, result = 1 });
         }

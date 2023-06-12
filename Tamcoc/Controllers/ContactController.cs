@@ -1,15 +1,14 @@
-﻿using System.Web.Mvc;
-using Tamcoc.DAL;
-using Tamcoc.ViewModel;
-using Tamcoc.Models;
-using System.Linq;
+﻿using Helpers;
 using PagedList;
 using System;
-using Helpers;
 using System.IO;
-using System.Drawing.Text;
+using System.Linq;
+using System.Web.Mvc;
+using Tamcoc.DAL;
+using Tamcoc.Models;
+using Tamcoc.ViewModel;
 
-namespace SamLife.Controllers
+namespace Tamcoc.Controllers
 {
     [Authorize]
     public class ContactController : Controller
@@ -234,7 +233,7 @@ namespace SamLife.Controllers
             _unitOfWork.Save();
             return RedirectToAction("UpdateFeedbackEn", new { feedbackId, result = 1 });
         }
-        public ActionResult UpdateFeedbackFr(int feedbackId , int result = 0)
+        public ActionResult UpdateFeedbackFr(int feedbackId, int result = 0)
         {
             ViewBag.Result = result;
             var feedback = _unitOfWork.FeedbackRepository.GetById(feedbackId);

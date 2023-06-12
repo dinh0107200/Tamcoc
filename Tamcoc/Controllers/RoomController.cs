@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using Helpers;
+using PagedList;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 using Tamcoc.DAL;
-using Tamcoc.ViewModel;
-using PagedList;
 using Tamcoc.Models;
-using Helpers;
-using System;
+using Tamcoc.ViewModel;
 
 namespace Tamcoc.Controllers
 {
@@ -37,7 +37,7 @@ namespace Tamcoc.Controllers
             var model = new InsertRoomViewModel()
             {
                 Room = new Room() { Sort = 1, Active = true },
-               KindOfRooms = _unitOfWork.KindOfRoomRepository.Get(orderBy: o => o.OrderBy(a => a.Sort)),
+                KindOfRooms = _unitOfWork.KindOfRoomRepository.Get(orderBy: o => o.OrderBy(a => a.Sort)),
             };
             return View(model);
         }
@@ -126,7 +126,7 @@ namespace Tamcoc.Controllers
         }
         #endregion
         #region Language
-        public ActionResult UpadateRoomEn(int roomId , int result = 0)
+        public ActionResult UpadateRoomEn(int roomId, int result = 0)
         {
             ViewBag.Result = result;
             var room = _unitOfWork.RoomRepository.GetById(roomId);
@@ -149,7 +149,6 @@ namespace Tamcoc.Controllers
             var url = fc["Url"];
 
             var conceptLang = _unitOfWork.RoomEnRepository.GetQuery(a => a.RoomId == roomId && a.LanguageId == langId).SingleOrDefault();
-
             if (conceptLang == null)
             {
                 _unitOfWork.RoomEnRepository.Insert(new RoomEn
@@ -165,7 +164,7 @@ namespace Tamcoc.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name)
+                    Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url)
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpadateRoomEn", new { roomId, result = 1 });
@@ -180,7 +179,7 @@ namespace Tamcoc.Controllers
             conceptLang.Body = body;
             conceptLang.TitleMeta = titleMeta;
             conceptLang.DescriptionMeta = descriptionMeta;
-            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url);
 
             _unitOfWork.Save();
 
@@ -225,7 +224,7 @@ namespace Tamcoc.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name)
+                    Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url)
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpadateRoomFr", new { roomId, result = 1 });
@@ -240,7 +239,7 @@ namespace Tamcoc.Controllers
             conceptLang.Body = body;
             conceptLang.TitleMeta = titleMeta;
             conceptLang.DescriptionMeta = descriptionMeta;
-            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url);
 
             _unitOfWork.Save();
 
@@ -281,7 +280,7 @@ namespace Tamcoc.Controllers
             }
             return View(model);
         }
-        public ActionResult UpdateProperty( int kindofRoom = 0, int typeId = 0)
+        public ActionResult UpdateProperty(int kindofRoom = 0, int typeId = 0)
         {
             var kindOfRoom = _unitOfWork.KindOfRoomRepository.GetById(kindofRoom);
 
@@ -341,5 +340,10 @@ namespace Tamcoc.Controllers
             return true;
         }
         #endregion
+        protected override void Dispose(bool disposing)
+        {
+            _unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

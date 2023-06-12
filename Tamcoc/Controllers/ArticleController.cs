@@ -2,11 +2,11 @@
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-using System.Data.Entity;
 using Tamcoc.DAL;
 using Tamcoc.Models;
 using Tamcoc.ViewModel;
@@ -208,15 +208,15 @@ namespace Tamcoc.Controllers
                     Description = description,
                     AboutText = aboutText,
                     AboutImage = aboutImage,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name),
+                    Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url),
 
-            });
+                });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateArticleCategoryEn", new { catId, result = 1 });
             }
             conceptCategoryLang.CategoryName = name;
             conceptCategoryLang.Description = description;
-            conceptCategoryLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            conceptCategoryLang.Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url);
             conceptCategoryLang.TitleMeta = titleMeta;
             conceptCategoryLang.DescriptionMeta = descriptionMeta;
             conceptCategoryLang.AboutText = aboutText;
@@ -251,7 +251,7 @@ namespace Tamcoc.Controllers
                     ArticleCategoryId = catId,
                     LanguageId = langId,
                     CategoryName = name,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name , false),
+                    Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url),
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
                     Description = description,
@@ -263,10 +263,10 @@ namespace Tamcoc.Controllers
             }
             conceptCategoryLang.CategoryName = name;
             conceptCategoryLang.Description = description;
-            conceptCategoryLang.Url = HtmlHelpers.ConvertToUnSign(null,url ?? name);
-            if(conceptCategoryLang.Url == null)
+            conceptCategoryLang.Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url);
+            if (conceptCategoryLang.Url == null)
             {
-                string convertedName = HtmlHelpers.ConvertToUnSign(null,name);
+                var convertedName = HtmlHelpers.ConvertToUnSign(null, name);
                 conceptCategoryLang.Url = convertedName.Replace(" ", "-");
             }
             conceptCategoryLang.TitleMeta = titleMeta;
@@ -519,7 +519,7 @@ namespace Tamcoc.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name)
+                    Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url)
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateArticleEn", new { artId, result = 1 });
@@ -530,7 +530,7 @@ namespace Tamcoc.Controllers
             conceptLang.Body = body;
             conceptLang.TitleMeta = titleMeta;
             conceptLang.DescriptionMeta = descriptionMeta;
-            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url);
 
             _unitOfWork.Save();
 
@@ -567,7 +567,7 @@ namespace Tamcoc.Controllers
                     Description = description,
                     TitleMeta = titleMeta,
                     DescriptionMeta = descriptionMeta,
-                    Url = HtmlHelpers.ConvertToUnSign(null, url ?? name)
+                    Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url)
                 });
                 _unitOfWork.Save();
                 return RedirectToAction("UpdateArticleFr", new { artId, result = 1 });
@@ -578,7 +578,7 @@ namespace Tamcoc.Controllers
             conceptLang.Body = body;
             conceptLang.TitleMeta = titleMeta;
             conceptLang.DescriptionMeta = descriptionMeta;
-            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url ?? name);
+            conceptLang.Url = HtmlHelpers.ConvertToUnSign(null, url == "" ? name : url);
 
             _unitOfWork.Save();
 

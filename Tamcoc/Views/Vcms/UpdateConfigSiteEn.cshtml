@@ -37,6 +37,17 @@
                         <textarea rows="4" class="form_control w300" name="Description">@(categoryVi?.Description)</textarea>
                     </td>
                 </tr>
+                
+                <tr>
+                    <td class="form_name">Địa chỉ</td>
+                    <td class="form_text"><strong>@Model.Place</strong></td>
+                </tr>
+                <tr>
+                    <td class="form_name">Địa chỉ</td>
+                    <td class="form_text">
+                        <input type="text" name="Place" value="@(categoryVi?.Place)" class="form_control w300"/>
+                    </td>
+                </tr>
                 <tr>
                     <td class="form_name">Bài gốc</td>
                     <td class="form_text"><strong>@Model.AboutFeedback</strong></td>
