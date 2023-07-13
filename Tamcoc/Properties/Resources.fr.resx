@@ -259,7 +259,7 @@
     <value>Veuillez entrer {0}</value>
   </data>
   <data name="Room" xml:space="preserve">
-    <value>Chambre</value>
+    <value>Types de Chambres</value>
   </data>
   <data name="RoomInfo" xml:space="preserve">
     <value>Informations sur la chambre</value>

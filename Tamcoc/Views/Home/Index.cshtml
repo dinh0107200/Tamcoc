@@ -25,10 +25,13 @@
                     <source src="@Path.Combine("/images/banners/", item.Video)" type="video/mp4">
                 </video>
             }
-            <div class="banner-slogan">
-                <p>@item.BannerName</p>
-                <span>@item.Slogan</span>
-            </div>
+            @if (item.Slogan != null)
+            {
+                <div class="banner-slogan">
+                    @*<p>@item.BannerName</p>*@
+                    <span>@item.Slogan</span>
+                </div>
+            }
         </div>
     }
 </section>
@@ -59,7 +62,7 @@
                     <a href="@config.AboutUrl" data-fancybox class="play-img">
                         <i class="fas fa-caret-circle-right"></i>
                     </a>
-                    
+
                     @if (config.AboutImage != null)
                     {
                         <img data-src="@Path.Combine("/images/configs/",config.AboutImage)" src="~/Content/images/img-main/base64.gif" alt="@config.Title" class="lazyload" />

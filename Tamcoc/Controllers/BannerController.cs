@@ -202,9 +202,9 @@ namespace Tamcoc.Controllers
                 }
                 else
                 {
-                    if (video.ContentLength > 4000 * 1024)
+                    if (video.ContentLength > 100 * 1024 * 1024)
                     {
-                        ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
+                        ModelState.AddModelError("", @"Dung lượng lớn hơn 100MB. Hãy thử lại");
                     }
                     else
                     {
@@ -272,9 +272,9 @@ namespace Tamcoc.Controllers
                 }
                 else
                 {
-                    if (video.ContentLength > 4000 * 1024)
+                    if (video.ContentLength > 100 * 1024 * 1024)
                     {
-                        ModelState.AddModelError("", @"Dung lượng lớn hơn 4MB. Hãy thử lại");
+                        ModelState.AddModelError("", @"Dung lượng lớn hơn 10MB. Hãy thử lại");
                     }
                     else
                     {

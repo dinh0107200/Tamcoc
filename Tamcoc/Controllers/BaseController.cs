@@ -181,8 +181,8 @@ namespace Tamcoc.Controllers
                     {
                         Id = a.BannerId,
                         BannerName = a.BannerName,
-                        Video = a.Video,
-                        Image = a.Image,
+                        Video = a.Banner.Video,
+                        Image = a.Banner.Image,
                         Home = a.Home,
                         ListImage = a.ListImage,
                         Slogan = a.Slogan,
@@ -214,9 +214,9 @@ namespace Tamcoc.Controllers
                     {
                         Id = a.BannerId,
                         BannerName = a.BannerName,
-                        Video = a.Video,
+                        Video = a.Banner.Video,
                         Home = a.Home,
-                        Image = a.Image,
+                        Image = a.Banner.Image,
                         ListImage = a.ListImage,
                         Slogan = a.Slogan,
                         GroupId = a.Banner.GroupId,

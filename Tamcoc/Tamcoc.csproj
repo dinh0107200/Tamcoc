@@ -388,8 +388,6 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <None Include="Properties\PublishProfiles\dinh0107201-001-site1 - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\dinh0107201-001-site1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\tamcocretreat 31.11.pubxml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\isotope.pkgd.min.js" />
