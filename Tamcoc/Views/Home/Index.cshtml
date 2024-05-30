@@ -103,7 +103,7 @@
 
                     <div class="room-slick__item__info">
                         <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})" class="room-slick__name">@item.Name</a>
-                        <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})"><i class="fas fa-circle"></i>Xem chi tiết <i class="fas fa-circle"></i></a>
+                        <a href="@Url.Action("RoomDetail", new {url = item.Url , Culture})"><i class="fas fa-circle"></i>@Resources.SeeMore <i class="fas fa-circle"></i></a>
                     </div>
                 </div>
                 delay += 200;
@@ -234,7 +234,7 @@
                                 <div class="view-article">
                                     <a href="@Url.Action("ArticleDetail", new {url = item.Url, Culture})">
                                         <i class="fas fa-plus"></i>
-                                        <span>Xem thêm</span>
+                                        <span>@Resources.SeeMore</span>
                                     </a>
                                 </div>
                             </div>
