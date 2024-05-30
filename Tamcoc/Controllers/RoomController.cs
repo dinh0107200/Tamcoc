@@ -125,6 +125,7 @@ namespace Tamcoc.Controllers
             return true;
         }
         #endregion
+
         #region Language
         public ActionResult UpadateRoomEn(int roomId, int result = 0)
         {
@@ -246,6 +247,7 @@ namespace Tamcoc.Controllers
             return RedirectToAction("UpadateRoomFr", new { roomId, result = 1 });
         }
         #endregion
+
         #region Property
         [ChildActionOnly]
         public ActionResult ListProperty()
@@ -340,6 +342,7 @@ namespace Tamcoc.Controllers
             return true;
         }
         #endregion
+
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

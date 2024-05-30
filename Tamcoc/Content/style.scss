@@ -242,6 +242,10 @@ input {
 
         a {
             color: $black !important;
+
+            &:hover {
+                color: $colorMain !important;
+            }
         }
 
         .header-top {
@@ -291,6 +295,7 @@ input {
                 }
             }
         }
+
         a {
             color: $white;
         }
@@ -388,6 +393,7 @@ input {
     font-size: 14px;
     line-height: 17px;
     text-align: center;
+
     a {
         color: $white;
         background: $colorMain;
@@ -398,10 +404,11 @@ input {
         font-size: 14px;
         color: $colorMain2;
         line-height: 17px;
-        transition:all .5s;
-        &:hover{
-            background:$colorMain2;
-            color:$white;
+        transition: all .5s;
+
+        &:hover {
+            background: $colorMain2;
+            color: $white;
         }
     }
 }
@@ -911,14 +918,16 @@ input {
 
         .media-img {
             position: relative;
-            overflow:hidden;
+            overflow: hidden;
+
             img {
                 width: 300px;
                 object-fit: cover;
                 aspect-ratio: 1.5;
-                transition:all .5s;
-                &:hover{
-                    transform:scale(1.1);
+                transition: all .5s;
+
+                &:hover {
+                    transform: scale(1.1);
                 }
             }
 
@@ -947,15 +956,16 @@ input {
                 @include Bold;
                 -webkit-line-clamp: 2;
                 height: 54px;
-                &:hover{
-                    color:$colorMain;
+
+                &:hover {
+                    color: $colorMain;
                 }
             }
 
             .article-des {
                 margin-top: 10px;
-                -webkit-line-clamp: 5;
-                height: 120px;
+                -webkit-line-clamp: 3;
+                height: 80px;
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 25px;
@@ -967,7 +977,7 @@ input {
                 font-size: 14px;
                 line-height: 17px;
                 color: #A4A4A4;
-                padding-bottom: 10px;
+                padding: 10px 0;
 
                 i {
                     color: $colorMain;
@@ -1240,6 +1250,10 @@ input {
                     }
                 }
             }
+
+            a:hover {
+                color: $colorMain;
+            }
         }
     }
 }
@@ -1409,7 +1423,7 @@ input {
     padding: 30px 0;
 
     .article-detail-title {
-        font-size: 20px;
+        font-size: 1.5rem;
         color: $colorMain2;
         @include Bold;
     }
@@ -1509,6 +1523,11 @@ input {
             }
         }
     }
+}
+
+.pagination > .active > a {
+    background: $colorMain;
+    border-color: $colorMain;
 }
 
 @include maxWidth(1366px) {
@@ -1906,17 +1925,18 @@ input {
         padding: 30px;
     }
 
-    .box-mb{
-        width:100% !important;
-        padding:0 !important;
+    .box-mb {
+        width: 100% !important;
+        padding: 0 !important;
     }
 }
+
 .order-right {
     position: fixed;
     transform: rotate(-90deg);
     right: -36px;
     width: 100px;
-    text-transform:uppercase;
+    text-transform: uppercase;
     height: auto;
     text-align: center;
     padding: 5px;

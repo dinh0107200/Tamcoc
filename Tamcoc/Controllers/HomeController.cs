@@ -238,6 +238,7 @@ namespace Tamcoc.Controllers
             model.Order.CreateDate = DateTime.Now;
             _unitOfWork.OrderRepository.Insert(model.Order);
             _unitOfWork.Save();
+
             var subject = "Email liên hệ từ website: " + Request.Url?.Host;
             var body = $"<p>Tên người liên hệ: {model.Order.CustomerInfo.FullName},</p>" +
                        $"<p>Số điện thoại: {model.Order.CustomerInfo.Mobile},</p>" +
@@ -248,7 +249,14 @@ namespace Tamcoc.Controllers
                        $"<p>Số người trẻ em: {model.Order.CustomerInfo.Children},</p>" +
                        $"<p>Nội dung: {model.Order.CustomerInfo.Body}</p>" +
                        $"<p>Đây là hệ thống gửi email tự động, vui lòng không phản hồi lại email này.</p>";
-            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, ConfigSiteDto().Email, Email, Email, Password, ConfigSiteDto().Title));
+
+
+            var emailOrder = ConfigSiteDto().Email;
+            if (ConfigSiteDto().EmailOrder != null)
+            {
+                emailOrder = ConfigSiteDto().EmailOrder;
+            }
+            Task.Run(() => HtmlHelpers.SendEmail("gmail", subject, body, emailOrder, Email, Email, Password, ConfigSiteDto().Title));
 
             return Json(new { status = true, msg = "We will get back to you as soon as possible !!" });
         }

@@ -263,6 +263,7 @@ namespace Tamcoc.Controllers
                 config.AboutText = model.AboutText;
                 config.InfoFooter = model.InfoFooter;
                 config.InfoContact = model.InfoContact;
+                config.EmailOrder = model.EmailOrder;
 
                 _unitOfWork.Save();
                 HttpContext.Application["ConfigSite"] = new ConfigSiteDto
@@ -287,7 +288,8 @@ namespace Tamcoc.Controllers
                     AboutImage = config.AboutImage,
                     Youtube = config.Youtube,
                     Favicon = config.Favicon,
-                    SubHeaderImage = config.SubHeaderImage
+                    SubHeaderImage = config.SubHeaderImage,
+                    EmailOrder = config.EmailOrder
                 };
                 return RedirectToAction("ConfigSite", "Vcms", new { result = "success" });
             }
@@ -365,7 +367,8 @@ namespace Tamcoc.Controllers
                 Favicon = configSiteLang.ConfigSite.Favicon,
                 AboutImage = configSiteLang.ConfigSite.AboutImage,
                 InfoContact = configSiteLang.InfoContact,
-                SubHeaderImage = configSiteLang.ConfigSite.SubHeaderImage
+                SubHeaderImage = configSiteLang.ConfigSite.SubHeaderImage,
+                EmailOrder = configSiteLang.ConfigSite.EmailOrder
             };
             return RedirectToAction("UpdateConfigSiteEn", new { configSiteId, result = 1 });
         }
@@ -440,7 +443,8 @@ namespace Tamcoc.Controllers
                 Favicon = configSiteLang.ConfigSite.Favicon,
                 AboutImage = configSiteLang.ConfigSite.AboutImage,
                 InfoContact = configSiteLang.InfoContact,
-                SubHeaderImage = configSiteLang.ConfigSite.SubHeaderImage
+                SubHeaderImage = configSiteLang.ConfigSite.SubHeaderImage,
+                EmailOrder = configSiteLang.ConfigSite.EmailOrder
             };
             return RedirectToAction("UpdateConfigSiteFr", new { configSiteId, result = 1 });
         }

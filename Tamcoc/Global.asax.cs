@@ -46,7 +46,8 @@ namespace Tamcoc
                     AboutUrl = a.AboutUrl,
                     Youtube = a.Youtube,
                     Favicon = a.Favicon,
-                    SubHeaderImage = a.SubHeaderImage
+                    SubHeaderImage = a.SubHeaderImage,
+                    EmailOrder = a.EmailOrder
                 }).FirstOrDefault();
                 Application["ConfigSiteEn"] = unitofWork.ConfigSiteEnRepository.GetQuery(a => a.LanguageId == 2).Select(a => new ConfigSiteDto
                 {
@@ -69,7 +70,8 @@ namespace Tamcoc
                     Favicon = a.ConfigSite.Favicon,
                     AboutText = a.AboutText,
                     Youtube = a.ConfigSite.Youtube,
-                    SubHeaderImage = a.ConfigSite.SubHeaderImage
+                    SubHeaderImage = a.ConfigSite.SubHeaderImage,
+                    EmailOrder = a.ConfigSite.EmailOrder
                 }).FirstOrDefault();
                 Application["ConfigSiteFr"] = unitofWork.ConfigSiteFrRepository.GetQuery(a => a.LanguageId == 3).Select(a => new ConfigSiteDto
                 {
@@ -93,7 +95,8 @@ namespace Tamcoc
                     Favicon = a.ConfigSite.Favicon,
                     AboutText = a.AboutText,
                     Youtube = a.ConfigSite.Youtube,
-                    SubHeaderImage = a.ConfigSite.SubHeaderImage
+                    SubHeaderImage = a.ConfigSite.SubHeaderImage,
+                    EmailOrder = a.ConfigSite.EmailOrder
                 }).FirstOrDefault();
             }
         }

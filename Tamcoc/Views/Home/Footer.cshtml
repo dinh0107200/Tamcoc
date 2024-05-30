@@ -24,7 +24,7 @@
                 <div class="footer-title mb-2">
                     @Resources.FooterForm
                 </div>
-                <i>@Resources.FooterDes</i>
+                <i class="small">@Resources.FooterDes</i>
                 <form class="subcribe-form">
                     @Html.AntiForgeryToken()
                     <div class="input-group">
@@ -71,7 +71,7 @@
         <div class="foote-show shadow bg-white d-lg-block d-none mt-4">
             <ul class="ul-reset">
                 <li><a href="@Url.Action("About", new {Culture})">@Resources.AboutUs</a></li>
-                <li><a href="@Url.Action("Room", new {Culture})"></a>@Resources.Room</li>
+                <li><a href="@Url.Action("Room", new {Culture})">@Resources.Room</a></li>
                 @foreach (var item in Model.ArticleCategoryDtos.Where(a => a.ShowFooter))
                 {
                     <li><a href="@Url.Action("ArticleDetail", new {url = item.Url , Culture})">@item.CategoryName</a></li>

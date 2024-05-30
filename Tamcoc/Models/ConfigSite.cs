@@ -49,6 +49,8 @@ namespace Tamcoc.Models
         public string Hotline { get; set; }
         [StringLength(50, ErrorMessage = "Tối đa 50 ký tự"), Display(Name = "Email"), UIHint("TextBox")]
         public string Email { get; set; }
+        [Display(Name = "Danh sách Email nhận thông báo - cách nhau dấu phẩy ','"), UIHint("TextBox")]
+        public string EmailOrder { get; set; }
         [Display(Name = "Thông tin liên hệ"), UIHint("EditorBox")]
         public string InfoContact { get; set; }
         [Display(Name = "Thông tin chân trang"), UIHint("EditorBox")]
@@ -56,8 +58,7 @@ namespace Tamcoc.Models
         [StringLength(500), Display(Name = "Ảnh bìa nhỏ trang phụ")]
         public string SubHeaderImage { get; set; }
 
-        public virtual ICollection<ConfigSiteEn> ConfigSiteEns
-        { get; set; }
+        public virtual ICollection<ConfigSiteEn> ConfigSiteEns { get; set; }
         public virtual ICollection<ConfigSiteFr> ConfigSiteFrs { get; set; }
     }
 
@@ -134,6 +135,7 @@ Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
         public string AboutText { get; set; }
         public string Hotline { get; set; }
         public string Email { get; set; }
+        public string EmailOrder { get; set; }
         public string InfoContact { get; set; }
         public string InfoFooter { get; set; }
         public string TaxCode { get; set; }
